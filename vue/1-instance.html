@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+  </div>
+  <div id="app2">
+    <h2>{{title}}</h2>
+    <hr>
+    <button @click="getTitle()">Get Title From Instance 1</button>
+  </div>
+<!-- script side -->
+  <script>
+    const vm1 = new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Multiple Instance1'
+      }
+    })
+    const vm2 = new Vue({
+      el:'#app2',
+      data:{
+        title:'Vue.Js Multiple Instance2'
+      },
+      methods:{
+        getTitle(){
+          alert(vm1.title)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

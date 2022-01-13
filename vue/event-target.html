@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <input type="text" @keyup.enter="getValue($event)" placeholder="type and enter">
+    <h2 @click="getText($event)">Target 1</h2>
+    <h2 @click="getText($event)">Target 2</h2>
+    <h2 @click="getText($event)">Target 3</h2>
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Event Target'
+      },
+      methods: {
+        getValue(event){
+          alert(event.target.value)
+        },
+        getText(event){
+          alert(event.target.innerText)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
