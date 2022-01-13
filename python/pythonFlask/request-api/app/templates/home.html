@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block body_content%}
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <th>Name</th>
+      <th>Email</th>
+      <th>Proccess</th>
+    </thead>
+    <tbody>
+      {% for item in users %}
+        <tr>
+          <th>{{item.name}}</th>
+          <th>{{item.email}}</th>
+          <th style="width: 250px;">
+            <a href="detail/{{item.name}}/{{item.id}}" class="btn btn-primary" style="width: 250px;">Address</a>
+          </th>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
