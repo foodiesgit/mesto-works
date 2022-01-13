@@ -1,0 +1,278 @@
+[
+  {
+    "name": "home",
+    "path": "/home",
+    "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home.vue",
+    "chunkName": "pages/home",
+    "children": [
+      {
+        "path": "account",
+        "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account.vue",
+        "chunkName": "pages/home/account",
+        "children": [
+          {
+            "name": "home-account",
+            "path": "",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\index.vue",
+            "chunkName": "pages/home/account/index",
+            "_name": "_a009471e"
+          },
+          {
+            "name": "home-account-basketinplaymarkets",
+            "path": "basketinplaymarkets",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\basketinplaymarkets.vue",
+            "chunkName": "pages/home/account/basketinplaymarkets",
+            "_name": "_3acb1fd2"
+          },
+          {
+            "name": "home-account-basketliverate",
+            "path": "basketliverate",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\basketliverate.vue",
+            "chunkName": "pages/home/account/basketliverate",
+            "_name": "_2b39f303"
+          },
+          {
+            "name": "home-account-basketmarkets",
+            "path": "basketmarkets",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\basketmarkets.vue",
+            "chunkName": "pages/home/account/basketmarkets",
+            "_name": "_27f1c450"
+          },
+          {
+            "name": "home-account-basketrate",
+            "path": "basketrate",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\basketrate.vue",
+            "chunkName": "pages/home/account/basketrate",
+            "_name": "_419f1597"
+          },
+          {
+            "name": "home-account-basketratelimit",
+            "path": "basketratelimit",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\basketratelimit.vue",
+            "chunkName": "pages/home/account/basketratelimit",
+            "_name": "_6d1f6598"
+          },
+          {
+            "name": "home-account-boss",
+            "path": "boss",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\boss.vue",
+            "chunkName": "pages/home/account/boss",
+            "_name": "_545e589e"
+          },
+          {
+            "name": "home-account-branch",
+            "path": "branch",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\branch.vue",
+            "chunkName": "pages/home/account/branch",
+            "_name": "_762f3e13"
+          },
+          {
+            "name": "home-account-codelist",
+            "path": "codelist",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\codelist.vue",
+            "chunkName": "pages/home/account/codelist",
+            "_name": "_2fb9ec88"
+          },
+          {
+            "name": "home-account-creditlog",
+            "path": "creditlog",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\creditlog.vue",
+            "chunkName": "pages/home/account/creditlog",
+            "_name": "_15fcad4a"
+          },
+          {
+            "name": "home-account-detailsaccount",
+            "path": "detailsaccount",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\detailsaccount.vue",
+            "chunkName": "pages/home/account/detailsaccount",
+            "_name": "_e1e626c8"
+          },
+          {
+            "name": "home-account-detailscomission",
+            "path": "detailscomission",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\detailscomission.vue",
+            "chunkName": "pages/home/account/detailscomission",
+            "_name": "_57671acf"
+          },
+          {
+            "name": "home-account-gamelog",
+            "path": "gamelog",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\gamelog.vue",
+            "chunkName": "pages/home/account/gamelog",
+            "_name": "_36a6a7f1"
+          },
+          {
+            "name": "home-account-generalset",
+            "path": "generalset",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\generalset.vue",
+            "chunkName": "pages/home/account/generalset",
+            "_name": "_57f6026b"
+          },
+          {
+            "name": "home-account-info",
+            "path": "info",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\info.vue",
+            "chunkName": "pages/home/account/info",
+            "_name": "_3f8e0d42"
+          },
+          {
+            "name": "home-account-loginlog",
+            "path": "loginlog",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\loginlog.vue",
+            "chunkName": "pages/home/account/loginlog",
+            "_name": "_7b8b3e28"
+          },
+          {
+            "name": "home-account-nextgoals",
+            "path": "nextgoals",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\nextgoals.vue",
+            "chunkName": "pages/home/account/nextgoals",
+            "_name": "_6e3fa968"
+          },
+          {
+            "name": "home-account-paycupons",
+            "path": "paycupons",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\paycupons.vue",
+            "chunkName": "pages/home/account/paycupons",
+            "_name": "_4ec4003d"
+          },
+          {
+            "name": "home-account-profile",
+            "path": "profile",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\profile.vue",
+            "chunkName": "pages/home/account/profile",
+            "_name": "_cfe3d7f0"
+          },
+          {
+            "name": "home-account-register",
+            "path": "register",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\register.vue",
+            "chunkName": "pages/home/account/register",
+            "_name": "_84d0e758"
+          },
+          {
+            "name": "home-account-setlimit",
+            "path": "setlimit",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\setlimit.vue",
+            "chunkName": "pages/home/account/setlimit",
+            "_name": "_6fa96f4a"
+          },
+          {
+            "name": "home-account-settime",
+            "path": "settime",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\settime.vue",
+            "chunkName": "pages/home/account/settime",
+            "_name": "_f74634e4"
+          },
+          {
+            "name": "home-account-singelbets",
+            "path": "singelbets",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\singelbets.vue",
+            "chunkName": "pages/home/account/singelbets",
+            "_name": "_20e2d12e"
+          },
+          {
+            "name": "home-account-soccerinplaymarkets",
+            "path": "soccerinplaymarkets",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\soccerinplaymarkets.vue",
+            "chunkName": "pages/home/account/soccerinplaymarkets",
+            "_name": "_c917fa58"
+          },
+          {
+            "name": "home-account-soccerliverate",
+            "path": "soccerliverate",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\soccerliverate.vue",
+            "chunkName": "pages/home/account/soccerliverate",
+            "_name": "_459643b4"
+          },
+          {
+            "name": "home-account-soccermarkets",
+            "path": "soccermarkets",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\soccermarkets.vue",
+            "chunkName": "pages/home/account/soccermarkets",
+            "_name": "_1d2b68cd"
+          },
+          {
+            "name": "home-account-soccerrate",
+            "path": "soccerrate",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\soccerrate.vue",
+            "chunkName": "pages/home/account/soccerrate",
+            "_name": "_01bb0a3a"
+          },
+          {
+            "name": "home-account-soccerratelimit",
+            "path": "soccerratelimit",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\soccerratelimit.vue",
+            "chunkName": "pages/home/account/soccerratelimit",
+            "_name": "_56d2c671"
+          },
+          {
+            "name": "home-account-Users",
+            "path": "Users",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\Users.vue",
+            "chunkName": "pages/home/account/Users",
+            "_name": "_6cd75687"
+          },
+          {
+            "name": "home-account-users-id",
+            "path": "users/:id?",
+            "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\account\\\\users\\\\_id.vue",
+            "chunkName": "pages/home/account/users/_id",
+            "_name": "_7c756923"
+          }
+        ],
+        "_name": "_58e176f1"
+      },
+      {
+        "name": "home-basketfixture",
+        "path": "basketfixture",
+        "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\basketfixture.vue",
+        "chunkName": "pages/home/basketfixture",
+        "_name": "_4192f647"
+      },
+      {
+        "name": "home-basketinplay",
+        "path": "basketinplay",
+        "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\basketinplay.vue",
+        "chunkName": "pages/home/basketinplay",
+        "_name": "_45726dea"
+      },
+      {
+        "name": "home-soccerfixture",
+        "path": "soccerfixture",
+        "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\soccerfixture.vue",
+        "chunkName": "pages/home/soccerfixture",
+        "_name": "_36cc9ac4"
+      },
+      {
+        "name": "home-soccerinplay",
+        "path": "soccerinplay",
+        "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\home\\\\soccerinplay.vue",
+        "chunkName": "pages/home/soccerinplay",
+        "_name": "_063820ee"
+      }
+    ],
+    "_name": "_ff928628"
+  },
+  {
+    "name": "resetpass",
+    "path": "/resetpass",
+    "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\resetpass.vue",
+    "chunkName": "pages/resetpass",
+    "_name": "_2ca238a3"
+  },
+  {
+    "name": "welcome",
+    "path": "/welcome",
+    "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\welcome.vue",
+    "chunkName": "pages/welcome",
+    "_name": "_eae5e036"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "D:\\\\Download\\\\Works\\\\betsblack\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_4a43b7d6"
+  }
+]
