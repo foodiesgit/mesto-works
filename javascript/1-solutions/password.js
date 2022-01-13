@@ -1,0 +1,46 @@
+const test = (param) => {
+  if(isNaN(param)) {
+    if (param.length < 5){
+      console.log('Password must be grater then 4 charecters!')
+    }
+    else if(!param.match(/[a-z]/)){
+      console.log('Password must be less one lower-case letter!')
+    }
+    else if(!param.match(/[A-Z]/)){
+      console.log('Password must be less one upper-case letter!')
+    }
+    else if(!param.match(/[0-9]/)){
+      console.log('Password must be less one digit!')
+    }
+    else if(!param.match(/[_@$/%#]/)){
+      console.log('Password must be less one symbol!')
+    }
+    else
+      console.log(`Your password is: ${param}`)
+  }else {
+    console.log('Please type a string!')
+  }
+}
+test('ad0@A')
+
+//with search
+// const test = (param) => {
+//   if (param.length < 5){
+//     console.log('Password must be grater then 4 charecters!')
+//   }
+//   else if(param.search(/[a-z]/) == -1){
+//     console.log('Password must be less one lower-case letter!')
+//   }
+//   else if(param.search(/[A-Z]/) == -1){
+//     console.log('Password must be less one upper-case letter!')
+//   }
+//   else if(param.search(/[0-9]/) == -1){
+//     console.log('Password must be less one digit!')
+//   }
+//   else if(param.search(/[_@$]/) == -1){
+//     console.log('Password must be less one symbol!')
+//   }
+//   else
+//     console.log(`Your password is: ${param}`)
+// }
+// test('aA@n0')

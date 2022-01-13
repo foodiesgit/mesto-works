@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      width: 600px;
+      text-align: center;
+    }
+    .target{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: cadetblue;
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.74) 0px 3px 8px;
+      height: 400px;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Intersection Lazy Loading</h2>
+  <div>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet sunt sit doloribus. Ex quis necessitatibus nihil molestias, ratione veniam, mollitia aut tenetur exercitationem maiores commodi quas, repellendus deleniti aspernatur similique.</p>
+  </div>
+  <div id="target" class="target">
+    Target for intersection
+  </div>
+  <div id="free" class="target">
+    Free no intersection
+  </div>
+
+  <script>
+    const target = document.getElementById('target')
+    const checkIt = (param) => {
+      console.log(param[0])
+    }
+    const ob = new IntersectionObserver(checkIt, {
+      threshold:0,//trigger target at 0% position
+      // threshold:0.5//trigger target at 50% position
+      // threshold:0.2//or trigger target at 100% position
+      // threshold: [0, 0.5, 1] //or multi position
+      // rootMargin: '200px'//trigger 200px before target
+    })
+    ob.observe(target)
+  </script>
+</body>
+</html>

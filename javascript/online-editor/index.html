@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <!-- navbar -->
+  <nav id ="navbar" class="navbar">
+    <!-- font -->
+    <section class="nav-container">
+      <div class="nav-header">Font</div>
+      <div class="nav-content">
+        <input type="number" name="font-size" id="font-size" class="font-input input" onchange="checkTopElement()">
+        <input type="color" name="font-color" id="font-color" class="color-input  input" >
+        <label id="font-italic" class="font-position input"><img src="./icons/font-italic.png" alt="" ></label>
+        <label id="font-nor" class="font-position input"><img src="./icons/font-normal.png" alt="" ></label>
+        <label id="font-bold" class="font-position input"><img src="./icons/font-bold.png" alt="" ></label>
+      </div>
+    </section>
+    <!-- text horizontal poition -->
+    <section class="nav-container">
+      <div class="nav-header">Horizontal</div>
+      <div class="nav-content">
+        <label id="font-left" class="font-position input"><img src="./icons/font-left.png" alt=""></label>
+        <label id="font-center" class="font-position input"><img src="./icons/font-center.png" alt="" ></label>
+        <label id="font-right" class="font-position input"><img src="./icons/font-right.png" alt="" ></label>
+      </div>
+    </section>
+    <!-- text vertical poition -->
+    <section class="nav-container">
+      <div class="nav-header">Vertical</div>
+      <div class="nav-content">
+        <label id="font-vertical-start" class="font-position input"><img src="./icons/font-vertical-start.png" alt="" ></label>
+        <label id="font-vertical-center" class="font-position input"><img src="./icons/font-vertical.png" alt="" ></label>
+        <label id="font-vertical-end" class="font-position input"><img src="./icons/font-vertical-end.png" alt="" ></label>
+      </div>
+    </section>
+    <section class="nav-container">
+      <div class="nav-header">Text</div>
+      <div class="nav-content">
+        <textarea name="" id="text" cols="3" rows="1" draggable="true" ondragstart="drag(event)" disabled></textarea>
+      </div>
+    </section>
+    <!-- background -->
+    <section class="nav-container input">
+      <div class="nav-header">Background</div>
+      <div class="nav-content">
+        <input type="color" name="bgc-color" id="bgc-color" class="color-input input">
+      </div>
+    </section>
+    <!-- border -->
+    <section class="nav-container input">
+      <div class="nav-header">Border</div>
+      <div class="nav-content">
+        <select name="border-style" id="border-style" class="input">
+          <option selected>Border</option>
+          <option value="solid">Solid</option>
+          <option value="dotted">Dotted</option>
+          <option value="dashed">Dashed</option>
+          <option value="double">Double</option>
+          <option value="groove">Groove</option>
+          <option value="ridge">Ridge</option>
+          <option value="inset">Inset</option>
+          <option value="outset">Outset</option>
+        </select>
+        <input type="number" name="border" id="border-width" class="border input">
+        <input type="color" name="border-color" id="border-color" class="color-input input">
+        <input type="number" name="border-radius" id="border-radius" class="border-radius input">
+      </div>
+    </section>
+    <!-- padding -->
+    <section class="nav-container">
+      <div class="nav-header">Padding</div>
+      <div class="nav-content">
+        <input type="number" name="padding" id="padding-left" class="padding-input input" >
+        <input type="number" name="padding" id="padding-top" class="padding-input input">
+        <input type="number" name="padding" id="padding-right" class="padding-input input">
+        <input type="number" name="padding" id="padding-bottom" class="padding-input input">
+      </div>
+    </section>
+    <!-- images -->
+    <section class="nav-container ">
+      <div class="nav-header">Images</div>
+      <div class="nav-content">
+        <label for="load-file" id="bgi-img" style="cursor: pointer; margin-top: 4px;"> 
+          <img src="./icons/bgi-icon.png"  alt="">
+        </label>
+        <input type="file" accept="image/*" name="img-file" id="load-file" style="display: none;">
+        <select name="background-size" id="background-size" class="input">
+          <option selected>Size</option>
+          <option value="auto">Auto</option>
+          <option value="cover">Cover</option>
+          <option value="contain">Contain</option>
+        </select>
+        <select name="background-position" id="background-position" class="input">
+          <option selected>Position</option>
+          <option value="center">Center</option>
+          <option value="left">Left</option>
+          <option value="right">Right</option>
+          <option value="top">Top</option>
+          <option value="top left">Top Left</option>
+          <option value="top right">Top Right</option>
+          <option value="bottom">Bottom</option>
+          <option value="bottom left">Bottom Left</option>
+          <option value="bottom right">Bottom Right</option>
+        </select>
+        <select name="background-repeat" id="background-repeat" class="input">
+          <option value="repeat">Repeat</option>
+          <option value="repeat-x">Repeat-x</option>
+          <option value="repeat-y">Repeat-y</option>
+          <option value="no-repeat">No-repeat</option>
+        </select>
+      </div>
+    </section>
+    <!-- ebook -->
+    <section class="nav-container">
+      <div class="nav-header">Tools</div>
+      <div class="nav-content nav-content-last">
+        <img src="./icons/delete.png" alt="" id="trash" class="trash input">
+        <img src="./icons/download.png" alt="" id="screenshot-button" class="trash input">
+      </div>
+    </section>
+  </nav>
+  <!-- container -->
+  <div id="container" class="container">
+    <!-- left -->
+    <section  class="left">
+      <div id="left" class="blog-container">
+        <h2 id="tt" class="blog-title"  draggable="true" ondragstart="drag(event)">Blog Title</h2>
+        <p id = "p" class="blog-content"  draggable="true" ondragstart="drag(event)">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, quas est accusantium excepturi magnam, illum tempora dicta cupiditate qui accusamus repudiandae cumque quos ipsa? Accusamus maiores culpa perferendis assumenda tempore?        
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, quas est accusantium excepturi magnam, illum tempora dicta cupiditate qui accusamus repudiandae cumque quos ipsa? Accusamus maiores culpa perferendis assumenda tempore?        
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, quas est accusantium excepturi magnam, illum tempora dicta cupiditate qui accusamus repudiandae cumque quos ipsa? Accusamus maiores culpa perferendis assumenda tempore?        
+        </p>
+        <img src="./img.png" alt="" id ="1" class="img" draggable="true" ondragstart="drag(event)">
+        <img src="./img.png" alt="" id ="2" class="img" draggable="true" ondragstart="drag(event)">
+        <img src="./img.png" alt="" id ="3" class="img" draggable="true" ondragstart="drag(event)">
+      </div>
+    </section>
+    <!-- right -->
+    <section id="right" class="right" >
+      <div id="tual" class="tual" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </section>
+  </div>
+  <!-- script side -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+ <script src="./main.js"></script>
+</body>
+</html>
