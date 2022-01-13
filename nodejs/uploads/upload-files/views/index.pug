@@ -1,0 +1,9 @@
+extends layout 
+block content 
+  form(action="/upload", method="post" enctype="multipart/form-data")
+    input(type="file", name="fFile")
+    //- input(type="file", name="fFile" multiple)
+    //- input(type="file", name="fFile", accept="image/jpg, image/png, image/svg+xml, application/pdf")
+    input(type="submit" value="Unpload")
+  
+  img(src="/"+imgname alt="" width="100" heigth="100")
