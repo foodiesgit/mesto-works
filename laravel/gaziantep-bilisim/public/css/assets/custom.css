@@ -1,0 +1,12 @@
+.boss-message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:100px;
+    margin: 30px auto;
+    margin-top: 50px;
+    border-radius: 5px;
+   background-image: url('../../img/0/bgi.jpeg');
+   background-repeat: no-repeat;
+   background-size: cover;
+}

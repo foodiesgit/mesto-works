@@ -14,7 +14,7 @@ const Users = mongoose.model('users', usersSchema)
 app.get('/', async(req, res) => {
   await Users.updateOne(
     {name:"Deniz"},
-    {$push:{hobbies: 'new hobbies'}}
+    {$push:{language: 'Javascript'}}
   )
   const result = await Users.find()
   res.json(result)

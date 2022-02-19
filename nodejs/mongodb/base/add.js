@@ -10,10 +10,10 @@ app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
   const newUser = new Users({
-    name:"Mesto",
+    name:"Tekin",
     password:"1234",
     salery:3000,
-    hobbies:['sport']
+    language:['Python']
   })
   await newUser.save()
   const result = await Users.find()
