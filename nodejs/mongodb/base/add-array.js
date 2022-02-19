@@ -15,6 +15,8 @@ app.get('/', async(req, res) => {
   await Users.updateOne(
     {name:"Deniz"},
     {$push:{language: 'Javascript'}}
+    //or
+    // {$addToSet:{language: 'Python'}}
   )
   const result = await Users.find()
   res.json(result)
