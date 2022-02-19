@@ -10,10 +10,7 @@ const host = '127.1.0.0' || process.env.HOST
 app.set('port', port)
 
 const db = new mongoose.connect('mongodb://localhost:27017/works',{
-  useCreateIndex: true,
-  useFindAndModify: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+  useNewUrlParser: true
 })
 .then(() => {console.log('Connected')})
 .catch((err) => {console.error(err)})
