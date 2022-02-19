@@ -9,7 +9,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
-  const result = await Users.find({})
+  await Users.deleteMany({salery:3000})
+  const result = await Users.find()
   res.json(result)
 })
 

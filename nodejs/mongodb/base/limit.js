@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
-  const result = await Users.find({})
+  const result = await Users.find({}).limit(2)
   res.json(result)
 })
 

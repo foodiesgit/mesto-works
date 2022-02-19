@@ -12,7 +12,7 @@ const usersSchema = new mongoose.Schema({},{strict: false})
 const Users = mongoose.model('users', usersSchema)
 
 app.get('/', async(req, res) => {
-  const result = await Users.find({}, "hobbies")
+  const result = await Users.find({}, "language")
   res.json(result)
 })
 

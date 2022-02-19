@@ -9,7 +9,22 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
-  const result = await Users.find({})
+  await Users.insertMany([
+    {
+      name:"Asli1",
+      password:"1234",
+      salery:3000,
+      language:['Python']
+    },
+    {
+      name:"Asli2",
+      password:"12345",
+      salery:3000,
+      language:['Javascript']
+    }
+  ])
+  
+  const result = await Users.find()
   res.json(result)
 })
 
