@@ -1,7 +1,7 @@
-const reverseFunc = (param) => {
-  return param.split('').reverse().join('')
-}
-console.log(reverseFunc('Mesto'))
+// const reverseFunc = (param) => {
+//   return param.split('').reverse().join('')
+// }
+// console.log(reverseFunc('Mesto'))
 
 // const reverseFunc = (param) => {
 //   let result = ''

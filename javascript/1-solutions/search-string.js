@@ -1,11 +1,13 @@
 let source = 'mesto is software worker mesto'
 
-let inc = source.includes('mesto')
-let mc = source.match('mesto')
-let sr = source.search('mesto')
-let ind = source.indexOf('mesto')
+// let inc = source.includes('mesto')
+// console.log(inc)
 
-console.log(inc)
-console.log(mc[0])
-console.log(sr)
-console.log(ind)
+// let mc = source.match('mesto')
+// console.log(mc[0])
+
+// let sr = source.search('mesto')
+// console.log(sr)
+
+// let ind = source.indexOf('mesto')
+// console.log(ind)

@@ -4,10 +4,9 @@ let users = [
   {id:3,name:'Baran',age:45,city:'Urfa'}
 ]
 // every
-console.log(users.every(item => item.name === 'Reso'))
-console.log(users.every(item => item.name === 'Reso' && item.city === 'Amed'))
+// console.log(users.every(item => item.name === 'Reso'))
+// console.log(users.every(item => item.name === 'Reso' && item.city === 'Amed'))
 
 // some
-console.log(users.some(item => item.name === 'Reso'))
-console.log(users.some(item => item.name === 'Reso' && item.city ==='Amed'))
-// sometwo arrays
+// console.log(users.some(item => item.name === 'Reso'))
+// console.log(users.some(item => item.name === 'Reso' && item.city ==='Amed'))

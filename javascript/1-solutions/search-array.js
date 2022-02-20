@@ -1,9 +1,12 @@
 let source = ['html','css','javascript','python']
 
-let inc = source.includes('css')
-let ind = source.indexOf('css')
-let fd = source.find(item => item == 'css')
+// let inc = source.includes('css')
+// console.log(inc)
 
-console.log(inc)
-console.log(ind)
-console.log(fd)
+
+// let ind = source.indexOf('css')
+// console.log(ind)
+
+
+// let fd = source.find(item => item == 'css')
+// console.log(fd)

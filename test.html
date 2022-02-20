@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="form1">
+    <input type="text" name="" id="name" minlength="3" maxlength="3" required>
+    <input type="number" name="" id="age" max="65" required>
+    <input type="button" id="send" value="Test">
+  </form>
+
+  <script>
+    document.getElementById('send').addEventListener('click', () => {
+      const name = parseInt(document.forms['form1']['age'].value)
+      console.log(name)
+    })
+    
+  </script>
+</body>
+</html>
