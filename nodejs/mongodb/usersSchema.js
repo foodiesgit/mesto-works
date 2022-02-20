@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 //if you need validation for array object please create a schema for nested
 //messages otherwise create simple messages:[] without schema
+
 const messagesSchema = new mongoose.Schema({
   userName:{type: String, required: true},
   text:{type: String, required: true}

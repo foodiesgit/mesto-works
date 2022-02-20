@@ -9,11 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
-  await Users.updateOne(
-    {name:"Baran"},
-    {$inc:{messagesCount: 1}}
-  )
-  const result = await Users.find()
+  const result = await Users.find({messagesCount:{$gt:4}})
   res.json(result)
 })
 
