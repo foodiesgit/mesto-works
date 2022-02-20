@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
-  const result = await Users.find({name:"Baran"})
+  const result = await Users.find({name:"Fatih"}, "messages")
   res.json(result)
 })
 

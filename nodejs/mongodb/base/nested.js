@@ -10,14 +10,14 @@ app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
   const newUser = new Users({
-    name:"Salman2",
+    name:"Fatih",
     password:"1234",
     salery:3000,
     language:['Python'],
     messages:[
-      {text:'Messages 1'},
-      {userName:'Salman2',text:'Messages 2'},
-      {userName:'Salman2',text:'Messages 3'}
+      {userName:'Fatih',text:'Messages 1'},
+      {userName:'Fatih',text:'Messages 2'},
+      {userName:'Fatih',text:'Messages 3'}
     ]
   })
   await newUser.save()
