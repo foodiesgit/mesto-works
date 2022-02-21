@@ -14,6 +14,8 @@ const UsersSchema = new mongoose.Schema({
   language: [{type:String, reuired: true}],
   messages:[messagesSchema],
   messagesCount: {type: Number},
+  scores:[Number],
+  children:[Array],
   created_at: {type: Date, default: Date.now()}
 })
 

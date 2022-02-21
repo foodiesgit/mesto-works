@@ -9,20 +9,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', async(req, res) => {
-  const newUser = new Users({
-    name:"Ali",
-    password:"1234",
-    salery:4000,
-    language:['Python','Javascript'],
-    messages:[{userName:"Ali",text:'Hello'}],
-    scores:[40,50,60],
-    children:[
-      {name:'Ali',age:12,gender:"male"},
-      {name:'Banu',age:2,gender:'female'}
-    ]
-  })
-  await newUser.save()
-  const result = await Users.find()
+  const result = await Users.find(
+    {scores:{$elemMatch:{$lt: 40}}}
+  )
   res.json(result)
 })
 
