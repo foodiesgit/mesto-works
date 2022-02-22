@@ -1,5 +1,0 @@
-python -m venv test
-cd test
-Scripts\activate
-
-  
