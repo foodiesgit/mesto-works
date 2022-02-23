@@ -426,7 +426,6 @@ router.get("/inplayodds/:id", cacheMiddleware(8),  (req, res)=>{
     console.log(error)
   }
 })
-
 router.get(`/scores/:id`,cacheMiddleware(60), (req,res) => {
  try {
     (async function fetchApi () {
