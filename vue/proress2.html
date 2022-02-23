@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .progress-con{
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      height: 24px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+    }
+    .progress{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      padding-left: 5px;
+      background-color:red;
+    }
+    .progress2{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      padding-right: 5px;
+      background-color: red;
+    }
+    .green{
+      background-color: mediumseagreen;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <div class="progress-con">
+      <div class="progress" :style="{width:counterHome + '%'}" :class="{green: counterHome > counterAway}">{{counterHome}} %</div>
+      <div class="progress2" :style="{width:counterAway + '%'}" :class="{green: counterAway > counterHome}">{{counterAway}} %</div>
+    </div>
+    <button @click="getHome()">Home</button>
+    <button @click="getAway()">Away</button>
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Progress',
+        counterHome:50,
+        counterAway:50
+      },
+      methods:{
+        getHome(){
+         this.counterHome += 1
+         this.counterAway -= 1
+        },
+        getAway(){
+         this.counterAway += 1
+         this.counterHome -= 1
+        }
+      },
+      // watch: {
+      //   counterHome () {
+      //     if (this.counterHome < 0) {
+      //       this.counterHome = 0
+      //     }else if(this.counterHome >= 100){
+      //       this.counterHome = 100
+      //     }
+      //   },
+      //   counterAway () {
+      //     if (this.counterAway < 0) {
+      //       this.counterAway = 0
+      //     }else if(this.counterAway >= 100){
+      //       this.counterAway = 100
+      //     }
+      //   }
+      // }
+    })
+  </script>
+</body>
+</html>
