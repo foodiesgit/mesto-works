@@ -1,6 +1,0 @@
-db.branches.insertMany([
-  {"bid":1,"bn":"Futbol"},
-  {"bid":2,"bn":"Futbol Canli"},
-  {"bid":3,"bn":"Basket"},
-  {"bid":4,"bn":"Basket Canli"}
-])
