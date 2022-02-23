@@ -1,0 +1,15 @@
+show databases;
+use works;
+db.dropDatabase;
+
+show collections;
+db.createCollection('users');
+db.users.drop();
+
+db.users.insert({name:'test1',pass:'123'})
+db.users.insertMany([
+  {name:'test1',pass:'123'},
+  {name:'test2',pass:'123'}
+])
+db.users.deleteOne({name:'test1'});
+db.users.deleteMany({salery:3000});
