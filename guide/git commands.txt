@@ -1,0 +1,29 @@
+0 create folder and type git init
+1 git config --global user.name "mestokaya" //add username
+2 git config --global user.email "mesto1830@outlook.com" //add email
+  ->check name git config --global user.name
+  ->check email git config --global user.email
+
+3 pwd //get current path
+4 ls -a //list hidden files and folders
+
+5 git init //create or update git project in specific folder
+6 git add . //to add a project on git stage or for file git add mmm.txt
+7 git commit -m "1.version" //send last state to github
+8 git status //shows status of all projects
+9 git add "new file" //add new project file on git
+10 git status //green colored file waiting to commit
+11 git log //list all versions
+12 git diff //list updated lines
+13 git diff --staged //
+14 git rm mmm.txt // delete send stage area
+15 git mv old.txt new.txt // change file name and send stage area
+16 git commit-m "old.txt" -> "new.txt" // change file name and to github
+17 git mv old.txt folder/
+git checkout -- index.txt // restore accidently wrong update
+git reset  HEAD index.txt and git checkout -- index.txt for staged restore
+git checkout <commit code> -- . //restore version
+git touch .gitignore
+cat >> .gitignore //open to write file names
+cat .gitignore //check inside file
+!foldername/filename //track all expect this file

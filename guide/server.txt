@@ -1,0 +1,15 @@
+Port-----------
+1 nano /etc/ssh/sshd_config ------ change port
+2 service sshd restart
+
+pass -------------
+1 type passwd on putty comandline
+2 paste new pass
+
+
+change timezone
+timedatectl
+timedatectl set-timezone Europe/Istanbul
+
+free -m
+nproc

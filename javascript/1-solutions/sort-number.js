@@ -1,0 +1,1 @@
+console.log([5,3,2,1,4].sort((x,y) => x-y))

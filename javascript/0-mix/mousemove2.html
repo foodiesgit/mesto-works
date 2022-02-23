@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body { background-color:#000; }
+    .left {
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+    }
+    .right {
+      -moz-transform: scaleX(1);
+      -o-transform: scaleX(1);
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+    }
+    #bee {
+      position:absolute;
+      transition: transform .1s
+      }
+  </style>
+</head>
+<body>
+  <div id="bee"> 
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160783/astroboy.png"   />
+  </div>
+
+  <script>
+		document.addEventListener("mousemove", getMouse)
+    let bee = document.getElementById("bee")
+		let beepos = {x:0, y:0}
+		let mouse = {x:0, y:0}
+		
+		function getMouse(e){
+      mouse.x = e.pageX
+			mouse.y = e.pageY
+      if(mouse.x > beepos.x){
+        bee.setAttribute("class", "right")
+      } else {
+        bee.setAttribute("class", "left")
+      }
+		}
+    setInterval(followMouse, 50)
+		
+		function followMouse(){
+			
+			let distX = mouse.x - beepos.x
+			let distY = mouse.y - beepos.y
+
+			beepos.x += distX/5
+			beepos.y += distY/2
+			
+			bee.style.left = beepos.x + "px"
+			bee.style.top = beepos.y + "px"
+		}
+  </script>
+</body>
+</html>

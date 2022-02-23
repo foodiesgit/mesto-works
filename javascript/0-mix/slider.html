@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .slider-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      min-height: 200px;
+      border-radius: 10px;
+      background-color: cornflowerblue;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+    .slider-arrow{
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .slider{
+      display: flex;
+      width: 100%;
+      min-height: 160px;
+      background: #fff;
+      margin: 0 20px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .slider-list{
+      display: flex;
+      list-style: none;
+      min-height: 160px;
+      width: auto;
+      background-color: #f1f1f1;
+      overflow: scroll;
+      scroll-behavior: smooth;
+      animation: slide 15s infinite;
+    }
+    .slider-list::-webkit-scrollbar {
+        display: none;
+    }
+    .slider-list::-moz-scrollbar {
+        display: none;
+    }
+    .slider-list li{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 160px;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin: 0 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <span id="slider-arrow-prev" class="slider-arrow"><</span>
+    <div class="slider">
+      <ul id="slider-list" class="slider-list">
+        <li>Item First</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item 5</li>
+        <li>Item Last</li>
+      </ul>
+    </div>
+    <span id="slider-arrow-next" class="slider-arrow">></span>
+  </div>
+</body>
+
+<script>
+  const sliderList = document.getElementById('slider-list')
+  const prevArrow = document.getElementById('slider-arrow-prev')
+  const nextArrow = document.getElementById('slider-arrow-next')
+
+  const checkArrows = () => {
+    if(sliderList.scrollLeft >= sliderList.offsetWidth){
+      nextArrow.style.display = 'none'
+    } else if(sliderList.scrollLeft === 0) {
+      prevArrow.style.display = 'none'
+    } else {
+      prevArrow.style.display = 'block'
+      nextArrow.style.display = 'block'
+    }
+  }
+  prevArrow.addEventListener('click', () => {
+    sliderList.scrollLeft -= 500
+    checkArrows()
+  })
+    nextArrow.addEventListener('click', () => {
+    sliderList.scrollLeft += 500
+    checkArrows()
+  })
+</script>
+</html>

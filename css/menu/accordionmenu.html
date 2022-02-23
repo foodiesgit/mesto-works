@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Accordion Menu With A</title>
+  </head>
+  <style media="screen">
+  *{margin: 0;padding: 0;}
+  .menu{
+    display: flex;
+    width:620px;
+    height: 34px;
+    margin: 50px auto;
+    list-style-type: none;
+  }
+  .menu > li{
+    width: 20%;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    background-color: #123;
+    color:#eee;
+    margin: 0 1px;
+    border: 1px solid #222;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  .menu li:hover{
+    background-color: #000;
+    cursor: pointer;
+  }
+  .submenu{
+    position: relative;
+    list-style-type: none;
+    left: 0;
+    top: -34px;
+    z-index: -1;
+  }
+  .submenu > li{
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #123;
+    color:#eee;
+    border: 1px solid #222;
+    border-radius: 3px;
+    box-sizing: border-box;
+    transform: rotateY(-90deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.4s ease-in-out;
+  }
+  .menu > li:hover .submenu > li:nth-child(1) {left: 0;top: 37px;transform: rotateY(0);}
+  .menu > li:hover .submenu > li:nth-child(2) {left: 0;top: 70px;transform: rotateY(0);}
+  .menu > li:hover .submenu > li:nth-child(3) {left: 0;top: 103px;transform: rotateY(0);}
+  .menu > li:hover .submenu > li:nth-child(4) {left: 0;top: 136px;transform: rotateY(0);}
+  .menu > li:hover .submenu > li:nth-child(5) {left: 0;top: 169px;transform: rotateY(0);}
+  </style>
+  <body>
+    <nav>
+    	<ul class="menu">
+    		<li>Home
+    			<ul class="submenu">
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    			</ul>
+    		</li>
+    		<li>Soccer
+    			<ul class="submenu">
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    			</ul>
+    		</li>
+    		<li>Basketball
+    			<ul class="submenu">
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    			</ul>
+    		</li>
+    		<li>Volleyball
+    			<ul class="submenu">
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    			</ul>
+    		</li>
+    		<li>Tennis
+    			<ul class="submenu">
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    				<li>Sub Items</li>
+    			</ul>
+    		</li>
+    	</ul>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+#index_right_menu{
+  display: flex;
+  justify-content: flex-end;
+  width: 184px;
+  min-width: 184px;
+  height: 38px;
+  margin:0;
+  padding:0;
+  margin-right: 25px;
+  background-color:#444;
+}
+.index_right_menu{
+  background-image:url(indexrightmenu.png);
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+}
+.irm-1 {   
+  background-position: 0 2px;
+}
+.irm-2 {   
+  background-position: -35px 2px;
+}
+.irm-3 {   
+  background-position: -67px 2px;
+}
+.irm-4 {   
+  background-position: -100px 2px;
+}
+.irm-5 {   
+  background-position: -238px 7px;
+}
+#index_right_menu > li{
+  width:25%;
+  height:100%;
+  list-style:none;
+}
+.index_right_menu{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  height:100%;
+  text-decoration:none;
+  color:#fff;
+}
+#index_right_menu li:hover{
+  background-color:#2a2a2a;
+}
+#index_right_menu li:hover #language{
+  display:block;
+}
+/*language*/
+#language{
+  display:none;
+  list-style:none;
+  width: 37px;
+  margin:0;
+  padding:0;
+  background-color:#444;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+#language li{
+  padding-left:3px;
+}
+.lng{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  height:35px;
+  text-decoration:none;
+  color:#fff;
+  background-image:url(lang.png);
+  background-repeat:no-repeat;
+}
+.lng-1{
+  background-position:-2px 4px;
+}
+.lng-2{
+  background-position:-2px -22px;
+}
+.lng-3{
+  background-position:-2px -48px;
+}
+.lng-4{
+  background-position:-2px -74px;
+}
+	</style>
+</head>
+<body>
+	<ul id="index_right_menu">
+		<!-- <?php
+			if(isset($_SESSION["membername"])){
+				switch($_SESSION["mission"]){
+					case "M1";
+						echo "<li><a href=index.php?page=boss id='owner_member' class='index_right_menu irm-1'></a></li>";
+					break; 
+					case "A2";
+						echo "<li><a href=index.php?page=boss id='owner_boss' class='index_right_menu irm-2'></a></li>";
+					break;
+					case "S3";
+						echo "<li><a href=index.php?page=boss id='owner_boss' class='index_right_menu irm-2'></a></li>";
+					break;
+					case "B4";
+						echo "<li><a href=index.php?page=boss id='owner_boss' class='index_right_menu irm-2'></a></li>";
+					break;
+				}
+			}
+		?> -->
+			<li><a href="#" id="open_link" class="index_right_menu irm-1"></a></li>
+			<li><a href="#" id="open_link" class="index_right_menu irm-2"></a></li>
+			<li><a href="#" id="open_link" class="index_right_menu irm-3"></a></li>
+			<li><a href="#" id="chat_link" class="index_right_menu irm-4"></a></li>
+			<li><a href="#" class="index_right_menu irm-5"></a>
+				<ul id="language">
+					<li><a href="lang/lang.php?lang=en" class="lng lng-1"></a></li>
+					<li><a href="lang/lang.php?lang=rs" class="lng lng-2"></a></li>
+					<li><a href="lang/lang.php?lang=ar" class="lng lng-3"></a></li>
+					<li><a href="lang/lang.php?lang=tr" class="lng lng-4"></a></li>
+				</ul>
+			</li>
+		</ul>
+</body>
+</html>

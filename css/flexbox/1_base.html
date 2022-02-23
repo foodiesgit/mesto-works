@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Layout Base</title>
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	display: flex;
+	flex-direction: column;
+	height: 100vh;/*this need for full height screen and fixed header and footer*/
+}
+#header{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height:40px;
+	min-height:40px;
+	color:#fff;
+	background-color:#353535;
+}
+#content{
+	display: flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+	height:100%;/*this needs for fixed footer*/
+	padding:10px;
+	box-sizing:border-box;
+	background-color:#ccc;
+	overflow: auto;
+}
+#content::-webkit-scrollbar{
+	width: 0;
+}
+#footer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height:40px;
+	min-height: 40px;
+	color:#fff;
+	background-color:#353535;
+}
+</style>
+</head>
+<body>
+	<div id="header">
+		<h3>Header</h3>
+	</div>
+	<div id="content">
+		<h1>Content</h1>
+	</div>
+	<div id="footer">
+		<h3>Footer</h3>
+	</div>   
+</body>
+</html>

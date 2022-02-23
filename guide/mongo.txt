@@ -1,0 +1,4 @@
+mongodump
+mongorestore
+mongodump --db=gasvet //only one db
+mongorestore --db=gasvet /dump/gasvet

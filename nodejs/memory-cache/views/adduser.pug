@@ -1,0 +1,10 @@
+extends layout
+block content
+  div.container
+      form(action='/adduser/' method='POST')
+        div.form-group
+          input.form-control(name='name' type='text' placeholder='Name')
+        div.form-group
+          input.form-control(name='password' type='text' placeholder='Password')
+        div.d-grid.gap-2
+          input.btn.btn-primary.mt-5(type='submit' value='Save')

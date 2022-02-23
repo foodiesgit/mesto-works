@@ -1,0 +1,66 @@
+sudo dnf install nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --list-all
+sudo firewall-cmd --reload
+sudo systemctl restart nginx
+
+cd /usr/share/nginx/html
+rm -rf *
+copy files in /usr/share/nginx/html
+
+sudo dnf module list nodejs
+sudo dnf module enable nodejs:10
+sudo dnf install nodejs
+
+npm install
+npm install pm2 -g
+npm run build && pm2 start ecosystem.config.js
+
+timedatectl
+timedatectl set-timezone Europe/Istanbul
+
+copy nginx.config to inside etc/nginx folder
+MYSQL------------------------------------------------------------------
+
+sudo dnf remove @mysql
+sudo dnf module reset mysql && sudo dnf module disable mysql
+sudo nano /etc/yum.repos.d/mysql-community.repo
+------------------------
+[mysql57-community]
+name=MySQL 5.7 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
+enabled=1
+gpgcheck=0
+
+[mysql-connectors-community]
+name=MySQL Connectors Community
+baseurl=http://repo.mysql.com/yum/mysql-connectors-community/el/7/$basearch/
+enabled=1
+gpgcheck=0
+
+[mysql-tools-community]
+name=MySQL Tools Community
+baseurl=http://repo.mysql.com/yum/mysql-tools-community/el/7/$basearch/
+enabled=1
+gpgcheck=0
+-------------------------
+sudo dnf --enablerepo=mysql57-community install mysql-community-server
+sudo systemctl enable --now mysqld.service
+grep 'A temporary password' /var/log/mysqld.log |tail -1
+sudo mysql_secure_installation
+mysql -u root -p
+create database
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '4BxTwr3kTF28w6pXAcyomaOMRqjox/qAcyomaYkivorOoGe1f@NYkivorOoGe';
+grant all privileges on gasvet.* to 'root'@'localhost' identified by '4BxTwr3kTF28w6pXAcyomaOMRqjox/qAcyomaYkivorOoGe1f@NYkivorOoGe';
+FLUSH PRIVILEGES; 
+exit
+mysql -u root -p gasvet < gasvet.sql
+sudo systemctl enable --now mysqld.service
+copy my.cnf file to inside etc folder
+
+
+yum remove mysql mysql-server
+mv /var/lib/mysql /var/lib/mysql_old
+rpm -qa | grep mysql

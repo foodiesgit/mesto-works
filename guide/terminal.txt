@@ -1,0 +1,3 @@
+ip a --------------------------internal ip
+hostname -I -------------------hostname
+curl ifconfig.me --------------external ip

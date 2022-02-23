@@ -1,0 +1,12 @@
+1 sudo apt install docker.io
+2 sudo systemctl enable --now docker //Start Docker and enter the following command to enable it after every time the system reboots.
+3 sudo usermod -aG docker mesto
+4 docker --version
+5 docker images
+6 delete node_modules folder and package-lock file
+7 create Dockerfile outside root folder
+8 docker build --tag node-docker-app .
+9 docker rmi -f id //remove image
+10 docker run -p 3000:3000 node-docker-app
+11 docker ps //list of running docker
+12 docker kill dockerid

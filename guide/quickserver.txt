@@ -1,0 +1,63 @@
+
+hostinger
+churhaldenstain@outlook.com
+AcyomaYkivorAcyomaYkivor28w6pX21rO/6i6Bg3kTF28w6pXAcy
+
+cloudeflare
+churhaldenstain@outlook.com
+6pX21rO/6i6Bg3kTF28w6pXAcy11qm16i6BgTbepWL5l0KK11qm16
+
+vpsserver
+mesto1830@outlook.com
+MK1972mk
+root
+185.247.117.205
+@/1830-MyVpsServerPasswords-1830/@
+
+
+mysql;
+root
+4BxTwr3kTF28w6pXAcyomaOMRqjox/qAcyomaYkivorOoGe1f@NYkivorOoGe
+
+mysql -u root -p
+2 mysqldump -p gasvet > gasvet.sql --- backup only table
+3 mysql -u root -p gasvet < gasvet.sql --- restore
+4 mysqldump -u root -p -R gasvet > gasvet.sql --- backup all
+5 DELETE FROM mysql.proc WHERE db = 'gasvet' AND type = 'PROCEDURE';
+6 DROP PROCEDURE name
+----repair---------------------------------------------------
+mysqlcheck -u root -p --auto-repair --optimize --all-databases
+service mysqld restart
+
+icacls "E:\zfolder" /deny everyone:(OI)(CI)F /T
+
+pager less -S
+than q for exit
+
+sudo yum install mysqltuner
+sudo mysqltuner
+
+netstat -plntu ----port info
+
+ALTER TABLE basketfixtures ENGINE = MyISAM;
+ALTER TABLE basketfixtures ROW_FORMAT=fixed;
+
+ALTER TABLE betsummaryALTER COLUMN woncount SET DEFAULT '0';
+
+DELETE FROM `betsummary` WHERE date < '2020-07-20 00:00:00';
+DELETE FROM bets WHERE NOT EXISTS (SELECT * FROM betsummary WHERE id = bets.betid);
+
+
+helin kod
+35952463
+
+net stop Spooler
+
+
+everest pass
+67132225
+
+542 248 64 22
+
+Your Mi Account ID: 6367240858
+mk1972mk
