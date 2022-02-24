@@ -1,5 +1,8 @@
 let nav = 0
 let clicked = null
+const dt = new Date()
+const day = dt.getDate()
+const month = dt.getMonth()
 const calendar = document.getElementById('calendar')
 let eventTitle = document.getElementById('event-title')
 let eventModel = document.getElementById('event-model')
@@ -34,10 +37,6 @@ const load = () => {
   if(nav !== 0){
     dt.setMonth(new Date().getMonth() + nav)//get months like 1.month 2.month 3.month
   }
-  
-  const dt = new Date()
-  const day = dt.getDate()
-  const month = dt.getMonth()
 
   const firstDayOfMonth = new Date(year, month, 1)//get first day of month
   const daysInMonth = new Date(year, month + 1, 0).getDate()
