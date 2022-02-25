@@ -1,17 +1,16 @@
 let nav = 0
 let clicked = null
-const dt = new Date()
-const day = dt.getDate()
-const month = dt.getMonth()
+
 const calendar = document.getElementById('calendar')
 let eventTitle = document.getElementById('event-title')
 let eventModel = document.getElementById('event-model')
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : []
+
 const testEvents = [//change this array with events to test
   {date:'1/11/2022',title:'Today is bad day'},
   {date:'1/12/2022',title:'Today is second bad day'}
 ]
-const weekdays = ['Sunday','Monday','Tuesday','Wednsday','Thursday','Friday','Saturday']
+const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
 const openModel = (date) => {
   clicked = date
@@ -32,17 +31,21 @@ const closeModel = () => {
 }
 
 const load = () => {
-  const year = dt.getFullYear()
-
+  const dt = new Date()
   if(nav !== 0){
     dt.setMonth(new Date().getMonth() + nav)//get months like 1.month 2.month 3.month
   }
+  
+  const day = dt.getDate()
+  const month = dt.getMonth()
+  const year = dt.getFullYear()
+
 
   const firstDayOfMonth = new Date(year, month, 1)//get first day of month
   const daysInMonth = new Date(year, month + 1, 0).getDate()
-
+  console.log(daysInMonth)
   document.getElementById('month-display').innerText = `${dt.toLocaleDateString('en-EN', { month: 'long'})} ${year}`
-  
+
   const dateString = firstDayOfMonth.toLocaleDateString('en-EN', {//date format of first day
     weekday: 'long',
     year:'numeric',
@@ -51,7 +54,7 @@ const load = () => {
   })
   const paddingDays = weekdays.indexOf(dateString.split(', ')[0])
   calendar.innerHTML = ''
-  for (let i = 1; i < paddingDays+daysInMonth+1; i++) {//create days of month
+  for (let i = 1; i <= paddingDays+daysInMonth; i++) {//create days of month
     const daySquare = document.createElement('div')
     daySquare.classList.add('day')
 
@@ -85,6 +88,7 @@ const deleteEvent = () => {
   document.getElementById('delete-model').style.display = 'none'
   load()
 }
+
 const initButtons = () => {
   document.getElementById('back').addEventListener('click', (e) => {
     nav--
@@ -117,6 +121,5 @@ const initButtons = () => {
   })
 }
 
-
-initButtons()
 load()
+initButtons()
