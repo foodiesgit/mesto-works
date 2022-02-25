@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2 id="title">Sessionstorage</h2>
+  <button id="set">Set SessionStorage</button>
+  <button id="get">Get SessionStorage</button>
+  <button id="del">Delete Manually SessionStorage Or Close Browser Tab</button>
+  <button id="delAll">Delete Manually All SessionStorage Or Close Browser Tab</button>
+<!-- script side----------------------------- -->
+  <script>
+    document.getElementById('set').addEventListener('click',()=>{
+      sessionStorage.setItem('auth','mesto')
+    })
+    document.getElementById('get').addEventListener('click',()=>{
+      alert(sessionStorage.getItem('auth'))
+    })
+    document.getElementById('del').addEventListener('click',()=>{
+      sessionStorage.removeItem('auth')
+    })
+    document.getElementById('delAll').addEventListener('click',()=>{
+      sessionStorage.clear()
+    })
+  </script>
+</body>
+</html>
