@@ -3,7 +3,6 @@ const app = express()
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
-import fetch from 'node-fetch'
 import cache from './middleware/cache.js'
 
 dotenv.config()

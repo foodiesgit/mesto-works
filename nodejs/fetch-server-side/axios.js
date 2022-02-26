@@ -3,7 +3,7 @@ const app = express()
 import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
-import redis from 'redis'
+import axios from 'axios'
 
 dotenv.config()
 app.use(helmet())
@@ -14,13 +14,8 @@ app.use(express.static('static'))
 
 app.get('/', async(get, res) => {
   try {
-    const client = redis.createClient(6379)
-    await client.connect()
-    
-    client.setEx('users', 3600, 'Mustafa Kaya')
-    const users = await client.get('users')
- 
-    res.send(users)
+    const result = await axios.get('https://jsonplaceholder.typicode.com/users')
+    res.send(result.data)
   } catch (error) {
     console.error(error)
   }
@@ -29,4 +24,3 @@ app.get('/', async(get, res) => {
 app.listen(3000, () => {
   console.log('Server is running...')
 })
-
