@@ -19,6 +19,13 @@ app.get('/', async(get, res) => {
     
     client.setEx('users', 3600, 'Mustafa Kaya')
     const users = await client.get('users')
+    //or with callback
+    // client.setEx('users',3600, 'mesto', (err, data => {
+    //   if(!err){
+    //     res.send(users)
+    //   }
+    //   console.error(err)
+    // }))
  
     res.send(users)
   } catch (error) {
