@@ -12,20 +12,16 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('static'))
 
+const client = redis.createClient(6379)
+client.connect()
+client.on('connect', () => {
+  console.log('Connected to redis...')
+})
+
 app.get('/', async(get, res) => {
   try {
-    const client = redis.createClient(6379)
-    await client.connect()
-    
     client.setEx('users', 3600, 'Mustafa Kaya')
     const users = await client.get('users')
-    //or with callback
-    // client.setEx('users',3600, 'mesto', (err, data => {
-    //   if(!err){
-    //     res.send(users)
-    //   }
-    //   console.error(err)
-    // }))
  
     res.send(users)
   } catch (error) {
