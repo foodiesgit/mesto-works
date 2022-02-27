@@ -4,3 +4,10 @@ set users 'Mustafa Kaya'
 append users ' Bidik' //apend end of value
 get users
 del users
+
+//obkects
+hset user1 name 'Mesto'
+hset user1 lastname 'Kaya'
+hset user1 age 50
+
+hget user1 name and so
