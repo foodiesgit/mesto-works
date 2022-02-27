@@ -1,0 +1,6 @@
+keys *
+exists users
+set users 'Mustafa Kaya'
+append users ' Bidik' //apend end of value
+get users
+del users
