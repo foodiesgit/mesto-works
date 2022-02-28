@@ -6,9 +6,9 @@ const helmet = require('helmet')
 const dotenv = require('dotenv')
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
-
 const homeRouter = require('./routers/homeRouter.js')
 const usersRouter = require('./routers/usersRouter.js')
+const responseTime = require('./middleware/responseTime')
 
 dotenv.config()
 app.use(helmet())
@@ -16,6 +16,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'static')))
+app.use(responseTime);
 
 app.set('view engine','pug')
 

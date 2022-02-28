@@ -1,5 +1,6 @@
 const Router = require('express').Router()
 const wrapAsync = require('../middleware/wrapasync.js')
+
 const Cryptr = require('cryptr')
 const cryptr = new Cryptr('secret')
 const redis = require('redis')
