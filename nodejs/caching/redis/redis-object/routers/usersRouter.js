@@ -1,8 +1,5 @@
 const Router = require('express').Router()
 const wrapAsync = require('../middleware/wrapasync.js')
-
-const Cryptr = require('cryptr')
-const cryptr = new Cryptr('secret')
 const redis = require('redis')
 const request = require('sync-request')
 
@@ -23,7 +20,7 @@ Router.get('/users', wrapAsync(async(req, res) => {
         users:result
       })
     } else {
-      const result =  request('get','https://jsonplaceholder.typicode.com/users?username=Bret',{json: {results: 'results'}})
+      const result =  request('get','https://jsonplaceholder.typicode.com/users',{json: {results: 'results'}})
       const final = JSON.parse(result.getBody('utf8'))
       client.setEx('users', 10, JSON.stringify(final));
       console.log("User successfully retrieved from the API");

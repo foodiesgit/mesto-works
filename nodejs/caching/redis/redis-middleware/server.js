@@ -4,6 +4,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
 import cache from './middleware/cache.js'
+const wrapAsync = require('../middleware/wrapasync.js')
 
 dotenv.config()
 app.use(helmet())
@@ -13,9 +14,9 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('static'))
 
 
-app.get('/', cache,(get, res) => {
+app.get('/', cache, wrapAsync((get, res) => {
   res.send('Hello')
-})
+}))
 
 app.listen(3000, () => {
   console.log('Server is running...')
