@@ -8,9 +8,12 @@ Router.get('/', (req, res) => {
   res.render('index',{title: 'Home',})
 })
 
-Router.get('/users', wrapAsync((req, res) => {
+Router.get('/users', wrapAsync(async(req, res) => {
   if(myCache.has('users')){
-    res.send(myCache.get('users'))
+    res.render('users', {
+      title:'Users',
+      users:myCache.get('users')
+    })
   }else{
     const result =  request('get','https://jsonplaceholder.typicode.com/users',{json: {results: 'results'}})
     const final = JSON.parse(result.getBody('utf8'))

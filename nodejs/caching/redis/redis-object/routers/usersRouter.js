@@ -13,17 +13,15 @@ Router.get('/users', wrapAsync(async(req, res) => {
   try{
     const users = await client.get('users')
     if(users) {
-      console.log("User successfully retrieved from cache");
-      const result = JSON.parse(users);
+      const final = JSON.parse(users);
       res.render('users', {
         title: 'Users',
-        users:result
+        users:final
       })
     } else {
       const result =  request('get','https://jsonplaceholder.typicode.com/users',{json: {results: 'results'}})
       const final = JSON.parse(result.getBody('utf8'))
       client.setEx('users', 10, JSON.stringify(final));
-      console.log("User successfully retrieved from the API");
       res.render('users', {
         title: 'Users',
         users:final

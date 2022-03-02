@@ -9,9 +9,9 @@ app.use(responseTime)
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(express.static(path.join(__dirname, 'static')))
 
 app.set('view engine','pug')
-app.use(express.static('./'))//pug mode
 
 //session middleware
 app.use(session({

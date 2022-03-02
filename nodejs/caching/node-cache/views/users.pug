@@ -11,13 +11,14 @@ block content
           th.list-header-th Email
           th.list-btn-container Proccess
       body
+        each item in users
           tr.list
-            td #{users[0].name}
-            td #{users[0].username}
-            td #{users[0].email}
+            td #{item.name}
+            td #{item.username}
+            td #{item.email}
             //- td #{moment(item.date).format('DD-MM-yyyy')}
             //- td #{new Date(item.date).toLocaleDateString('tr')}
             td.form-btn-container(style = "width:260px")
-              a.form-btn.primary(href=`detailuser/${users[0].id}`) Details
-              a.form-btn.warning(href=`edituser/${users[0].id}`) Edit
-              a.form-btn.danger(href=`deleteuser/${users[0].id}`) Delete
+              a.form-btn.primary(href=`detailuser/${item.id}`) Details
+              a.form-btn.warning(href=`edituser/${item.id}`) Edit
+              a.form-btn.danger(href=`deleteuser/${item.id}`) Delete
