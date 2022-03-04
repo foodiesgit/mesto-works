@@ -1,13 +1,13 @@
 <script>
-	import Navbar from "./navbar.svelte";
+	import Header from "./header.svelte";
 	import Image from "./image.svelte";
 
-	let title = 'Home Page'
+	let text = 'Svelte Components'
 	let src = '../images/svelte.png'
 </script>
 
 <main>
-	<Navbar title={title}/>
+	<Header text={text}/>
 	<Image src={src}/>
 </main>
 

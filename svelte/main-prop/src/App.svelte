@@ -1,9 +1,9 @@
 <script>
-	let name = 'Svelte JS Base';
+	export let msg;
 </script>
 
 <main>
-	<h1>{name}</h1>
+	<h1>{msg}</h1>
 </main>
 
 <style>
@@ -16,7 +16,7 @@
 
 	h1 {
 		color: #ff3e00;
-		font-weight: bold;
+		font-size: 4em;
 	}
 
 	@media (min-width: 640px) {
