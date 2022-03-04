@@ -7,8 +7,8 @@
 </script>
 
 <main>
-	<Header text={text}/>
-	<Image src={src}/>
+	<Header {text}/>
+	<Image {src}/>
 </main>
 
 <style>
