@@ -2,4 +2,4 @@
   export let text
 </script>
 
-<h1>{text}</h1>
+<h3>{text}</h3>

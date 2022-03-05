@@ -1,5 +1,5 @@
 <script>
-	let name = 'Svelte JS Base';
+	export let name
 </script>
 
 <main>

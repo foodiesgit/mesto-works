@@ -1,9 +1,11 @@
 <script>
+	import Auth from './auth.svelte'
 	export let name;
 </script>
 
 <main>
 	<h1>{name}</h1>
+	<Auth />
 </main>
 
 <style>
@@ -16,7 +18,7 @@
 
 	h1 {
 		color: #ff3e00;
-		font-size: 4em;
+		font-weight: bold;
 	}
 
 	@media (min-width: 640px) {

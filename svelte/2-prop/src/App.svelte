@@ -1,12 +1,13 @@
 <script>
 	import Header from "./header.svelte";
 	import Image from "./image.svelte";
-
+	export let name
 	let text = 'Svelte Components'
 	let src = '../images/svelte.png'
 </script>
 
 <main>
+	<h1>{name}</h1>
 	<Header {text}/>
 	<Image {src}/>
 </main>
