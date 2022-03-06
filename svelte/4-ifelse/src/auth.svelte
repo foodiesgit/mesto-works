@@ -2,16 +2,13 @@
   let auth = {
     loggedIn: false
   }
-  const login = () => {
-    auth.loggedIn = false
-  }
-  const logout = () => {
-    auth.loggedIn = true
+  const authHandle = () => {
+    auth.loggedIn = ! auth.loggedIn
   }
 </script> 
   
 {#if auth.loggedIn}
-  <button on:click={login}>Logout</button>
+  <button on:click={authHandle}>Logout</button>
 {:else}
-  <button on:click={logout}>Login</button>
+  <button on:click={authHandle}>Login</button>
 {/if}
