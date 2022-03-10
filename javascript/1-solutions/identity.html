@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <input type="number" id="identity" onblur="tckimlikkontorolu(event)">
+  <input type="number" id="identity" onkeyup="tckimlikkontorolu(event)">
   <input type="button" id="send" value="Send">
   <label for="" id="tc-msg"></label>
 
@@ -27,6 +27,10 @@
           document.getElementById('send').disabled = true
           document.getElementById('tc-msg').innerText = 'Bu TC numarası geçersiz!'
       }
+      // if(param.value.length > 11){
+      //   e.preventDefault()
+      //   document.getElementById('tc-msg').innerText = 'TC must be only 11 degit!'
+      // }
     }
   </script>
 </body>
