@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    const letter = (param) => {
+      if (isNaN(param)) {
+        if (param.match(/[a-zA-Z]/)) {
+          console.log('String')
+        } else {
+          console.log('Number')
+        }
+      } else {
+        console.log('Please type a string!')
+      }
+    }
+    letter('0909')
+  </script>
+</body>
+
+</html>
