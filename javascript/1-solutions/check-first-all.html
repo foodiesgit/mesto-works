@@ -9,16 +9,15 @@
 <body>
   <input type="text" placeholder="name" class="input">
   <input type="text" placeholder="lastname" class="input">
+  <input type="password" placeholder="password" class="input">
   <input type="button" id="send" value="Send">
   <script>
     document.getElementById('send').addEventListener('click', () => {
-      let state = []
-      document.querySelectorAll('.input').forEach(item  => {
-        const pattern = /^[a-zA-z].*/
-        !item.value.match(pattern) ? state.push(false) : state.push(true)
+      let state = true
+      document.querySelectorAll('input[type=text]').forEach(item  => {
+        !item.value.match(/^[a-zA-z].*/) ? state = false : null
       })
-      let check = state.includes(false)
-      !check ? alert('Success') : alert('Failed')
+      state ? alert('Success') : alert('Failed')
     })
   </script>
 </body>
