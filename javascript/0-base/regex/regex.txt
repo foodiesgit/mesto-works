@@ -1,18 +1,2 @@
 1 .       select evrything include space
-2 \. \[   select dots and special charkters
-3 \w      select alpha and numeric
-4 \W      select not alpha and numeric
-5 \d      select numeric
-6 \D      select not numeric(but evrything)
-7 \s      select all space
-8 \S      select everything expect space
-9 ^Kaya   start from given charecters
-10 $Kaya  finished from given charecters
-11 |      or
-12 [123]  grouping
-13 [a-z][0-9]  between
-14 [^0-9] not numeric or nit given
-15 \d{2}  return 2 numeric
-16 \d{3,}  return equal and greather 3 charecters
-17 *      optional and plus
-18 ?      optional
+
