@@ -3,7 +3,6 @@ const app = express()
 const cors = require('cors')
 const helmet = require('helmet')
 const Vonage = require('@vonage/server-sdk')
-const pug = require('pug')
 
 app.use(cors())
 app.use(helmet())
