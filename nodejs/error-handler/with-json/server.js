@@ -15,8 +15,8 @@ app.use((req, res)=>{
 })
 
 //global errors
-app.use((err, req, res, next) => {
-  res.json({error: err})
+app.use((error, req, res, next) => {
+  res.json(error)
 })
 
 app.listen(3000, ()=> {
