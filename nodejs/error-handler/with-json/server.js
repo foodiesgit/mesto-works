@@ -16,7 +16,7 @@ app.use((req, res)=>{
 
 //global errors
 app.use((error, req, res, next) => {
-  res.json(error)
+  res.status(400).json(error)
 })
 
 app.listen(3000, ()=> {

@@ -7,7 +7,6 @@ router.get('/', (req, res) => {
     res.jso({ message: 'Hello' })
   } catch (error) {
     res.json({
-      ststusCode: 400,
       errorMessge: 'There is no json'
     })
   }
