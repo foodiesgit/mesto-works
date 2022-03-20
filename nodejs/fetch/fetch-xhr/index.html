@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    #list{
+    #list {
       display: flex;
       flex-direction: column;
       list-style: none;
-      width:300px;
+      width: 300px;
     }
-    .list{
+
+    .list {
       display: flex;
-      border:1px solid #ccc;
-      border-radius:2px;
-      margin:3px 0;
-      padding:5px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      margin: 3px 0;
+      padding: 5px;
     }
-    .list-id{
+
+    .list-id {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -27,17 +30,20 @@
       color: #fff;
       border-radius: 2px;
     }
-    .list-name{
+
+    .list-name {
       display: flex;
       align-items: center;
       width: 140px;
       padding-left: 5px;
     }
-    button{
-      margin:0 5px;
+
+    button {
+      margin: 0 5px;
     }
   </style>
 </head>
+
 <body>
   <h2>Node.JS Fetch Async</h2>
   <button onclick="addLangs()">Add Langs</button>
@@ -51,14 +57,14 @@
   </ul>
   <!-- script side -->
   <script>
-    
+
     let result;
-    
+
     let getLangs = async () => {
       let xhr = new XMLHttpRequest()
       xhr.open('get', 'http://localhost:3000/langs', true)
-      xhr.onload =  function(){
-        if(this.status === 200){
+      xhr.onload = function () {
+        if (this.status === 200) {
           result = JSON.parse(this.responseText)
           addDom(result)
         }
@@ -66,7 +72,7 @@
       xhr.send()
     }
     getLangs()
-    
+
     let addLangs = async () => {
       document.getElementById('list').innerHTML = ''
       const http = new XMLHttpRequest()
@@ -74,10 +80,10 @@
       http.setRequestHeader('Content-type', 'application/json')
       http.send(JSON.stringify({
         name: document.getElementById('add-new').value
-        .split(' ').map(item =>item[0].toUpperCase() + item.slice(1)).join(' ')
+          .split(' ').map(item => item[0].toUpperCase() + item.slice(1)).join(' ')
       }))
-      http.onload = function() {
-        if(this.status === 200){
+      http.onload = function () {
+        if (this.status === 200) {
           result = JSON.parse(this.responseText)
           addDom(result)
         }
@@ -90,39 +96,39 @@
       http.open('PUT', 'http://localhost:3000/updatelang')
       http.setRequestHeader('Content-type', 'application/json')
       http.send(JSON.stringify({
-        id:id,
+        id: id,
         name: document.getElementById('add-new').value
       }))
-      http.onload = function() {
-        if(this.status === 200){
+      http.onload = function () {
+        if (this.status === 200) {
           result = JSON.parse(this.responseText)
           addDom(result)
         }
       }
     }
-    
+
     let deleteLangs = async (id) => {
       document.getElementById('list').innerHTML = ''
       const http = new XMLHttpRequest()
       http.open('DELETE', 'http://localhost:3000/deletelang')
       http.setRequestHeader('Content-type', 'application/json')
       http.send(JSON.stringify({
-        id:id
+        id: id
       }))
-      http.onload = function() {
-        if(this.status === 200){
+      http.onload = function () {
+        if (this.status === 200) {
           result = JSON.parse(this.responseText)
           addDom(result)
         }
       }
     }
-    
+
     let searchLangs = () => {
       document.getElementById('list').innerHTML = ''
       let searchValue = document.getElementById('search').value
-      if(searchValue !== '') {
+      if (searchValue !== '') {
         let search = searchValue
-        .split(' ').map(item => item[0].toUpperCase() + item.slice(1)).join(' ')
+          .split(' ').map(item => item[0].toUpperCase() + item.slice(1)).join(' ')
         addDom(result.filter(item => item.name.includes(search)))
       } else {
         addDom(result)
@@ -130,7 +136,7 @@
     }
 
     const addDom = (param) => {
-      param.forEach((item,index) => {
+      param.forEach((item, index) => {
         document.getElementById('list').innerHTML += `
         <li class="list">
           <span class="list-id">${item.id}</span>
@@ -140,7 +146,8 @@
         </li>`
       })
     }
-  
+
   </script>
 </body>
+
 </html>
