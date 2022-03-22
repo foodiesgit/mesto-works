@@ -7,17 +7,17 @@ const cron = require('node-cron')
 // cron.schedule('*/5 * * * * *', () => backupMongo())
 
 function backupMongo() {
-  const child = spawn('mongodump',[
-    '--db='+ 'gasvet',
+  const child = spawn('mongodump', [
+    '--db=' + 'gasvet',
     '--host=' + 'localhost'
   ])
   child.on('exit', (code, signal) => {
     __dirname + '/gasvet'
-    if(code) 
+    if (code)
       console.log('Backup process exited with code ', code);
     else if (signal)
       console.error('Backup process was killed with singal ', signal);
-    else 
+    else
       console.log('Successfully backedup the database')
   })
 }
