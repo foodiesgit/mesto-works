@@ -1,0 +1,4 @@
+1 - composer require laravel/ui
+2 - php artisan ui bootstrap --auth
+3 - call bootstrap cdn in resource/view/layouts/app as link rel
+4 - Go to vendor/laravel/ui/src/AuthRouteMethods to change url routr example login-giris

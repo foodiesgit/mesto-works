@@ -9,36 +9,38 @@
           <th class="table-header-item">Country</th>
         </tr>
       </thead>
-      <tr class="table-list" v-for="(item,index) in persons" :key="index">
-        <td class="table-list-item">{{item.name}}</td>
-        <td class="table-list-item">{{item.gender}}</td>
-        <td class="table-list-item">{{item.company.location.country}}</td>
+      <tr class="table-list" v-for="(item, index) in persons" :key="index">
+        <td class="table-list-item">{{ item.name }}</td>
+        <td class="table-list-item">{{ item.gender }}</td>
+        <td class="table-list-item">{{ item.company.location.country }}</td>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name:'index',
-  data () {
+  name: "index",
+  data() {
     return {
-      persons: {}
-    }
+      persons: {},
+    };
   },
   mounted() {
-    this.connectNodejs()
+    this.connectNodejs();
   },
-  methods:{
-    async connectNodejs(){
-      await axios.post('/api',{query: this.$route.query.page}).then(result => {
-        console.log(result.data)
-        this.persons = result.data
-      })
-    }
-  }
-}
+  methods: {
+    async connectNodejs() {
+      await axios
+        .post("/api", { query: this.$route.query.page })
+        .then((result) => {
+          console.log(result.data);
+          this.persons = result.data;
+        });
+    },
+  },
+};
 </script>
 
 <style>
