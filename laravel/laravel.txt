@@ -1,0 +1,71 @@
+to create project with laravel new projectname
+do this
+composer global require laravel/installer
+export PATH=~/.config/composer/vendor/bin:$PATH
+source ~/.bashrc
+then laravel new projectname
+----------------------------------------------------------
+composer create-project laravel/laravel projectname
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+npm install
+npm run dev
+-------------------------------------------------
+1 migration is create a table in project example php artisan make:migration admin --create="admin"
+2 migrate is create table in database after created migration table example php artisan migrate
+3 seeder is create fake data in specific table  example php artisan make:seeder admin and run php artisan db:seed
+
+
+//for photo path run------------------------------
+php artisan storage:link then change .env API = http://127.0.0.1:8000
+
+//with new name--------------------------
+$fileName = session()->get( 'email' ).'.'.$req->file->getClientOriginalExtension();
+//with original name--------------------------
+$req->file->move(public_path('images'), $req->file->getClientOriginalName());
+
+//store to public folder---------------------
+$req->file->move(public_path('uploads'), $fileName);
+
+//store to storage/public folder-------------
+$req->file->storeAs('public', $fileName);
+
+//storage base64 image---------------------
+$folderName = $req->folderName;
+$image = $req->file;
+$image = str_replace('data:image/png;base64,', '', $image);
+$image = str_replace(' ', '+', $image);
+$folderName = $req->folderName;
+Storage::disk('public')->put('magazine/'.$folderName.'/'.$req->fileName.'.png', base64_decode($image));
+
+//change this code with public code in config/filesystem file to use publci folder
+'public' => [
+    'driver' => 'local',
+    'root'   => public_path() . '/upload',
+    'url' => env('APP_URL').'/public',
+    'visibility' => 'public',
+],
+
+//email----------------------------------------------
+$emailTo = $req->email;
+$subject = $req->subject;
+$text = $req->text;
+Mail::raw($text, function($message) use($emailTo, $subject) {
+    $message->subject($subject);
+    $message->to($emailTo);
+});
+
+//list all files in storage--------------------
+$data['files'] = Storage::disk('public')->files('');
+
+//download file--------------------------------
+Route::get('downloadfile/{filename}', function($filename){
+    return Storage::download('public/'.$filename);
+});
+
+$rules = Validator::make($req->all(),$validationRules,[
+    'min'=>'Name must be:min charecters!'
+]);
+
+
+
