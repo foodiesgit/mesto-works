@@ -18,10 +18,9 @@
   <script>
    document.getElementById('send').addEventListener('click', () => {
      const email = document.getElementById('email').value
-     let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+     let pattern = /(^[^ ]+)@([^ ]+)\.([a-z]{2,3})$/
      email.match(pattern) ? console.log(email) : console.log('Pattern not match!')
    })
-    
   </script>
 </body>
 </html>
