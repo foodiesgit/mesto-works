@@ -29,7 +29,6 @@
     "pug": "^3.0.2",
     "redis": "^4.0.4",
     "response-time": "^2.3.2",
-    "svelte-spa-router": "^3.2.0",
     "sync-request": "^6.1.0"
   }
 }
