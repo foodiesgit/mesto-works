@@ -1,0 +1,14 @@
+ul {
+  display: flex;
+  list-style: none;
+}
+ul li{
+  margin: 0 20px;
+  font-size: 20px;
+}
+ul li a{
+  text-decoration: none;
+}
+.active{
+  color:red;
+}
