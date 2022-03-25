@@ -1,7 +1,7 @@
 //native mode---------------------------------
 const http = require('http')
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+    res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' })
     res.end('<h2>Welcome To NodeJs Server Native Version</h2>')
 
     //or json
