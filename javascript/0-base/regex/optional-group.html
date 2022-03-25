@@ -11,8 +11,8 @@
 <body>
 
   <script>
-    const regex = /Ka[s|y]a/gm;
-    const str = `Mustafa Kaya 3000 mesto@outlook.com 52 Mustafa Kasa Kara`;
+    const regex = /Ka[sym]?a/gm;
+    const str = `Mustafa Kaya 3000 mesto@outlook.com 52 Mustafa Kasa Kara Kama`;
     const final = []
     while ((result = regex.exec(str)) !== null) {
       if (result.index === regex.lastIndex) {
