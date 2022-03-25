@@ -11,8 +11,8 @@
 <body>
 
   <script>
-    const regex = /\w{4,8}/gm;
-    const str = `Mustafa Kaya 3000 mesto@outlook.com 52 Mustafa`;
+    const regex = /[0-9]{4,7}/gm;
+    const str =  [123,1234,12345,123456,1234567,12345678,123456789]
     const final = []
     while ((result = regex.exec(str)) !== null) {
       if (result.index === regex.lastIndex) {
