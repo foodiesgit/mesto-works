@@ -9,3 +9,7 @@
         <a class="nav-link" href="{{ route('contact') }}">@lang('navbar.contact')</a>
     </li>
 </ul>
+<ul>
+    <li><a href="{{ url('lang/en') }}">English</a></li>
+    <li><a href="{{ url('lang/tr') }}">Turkish</a></li>
+</ul>
