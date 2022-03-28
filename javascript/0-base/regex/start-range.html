@@ -11,8 +11,8 @@
 <body>
 
   <script>
-    const regex = /\w{4,8}/gm;
-    const str = `Mustafa Kaya 3000 mesto@outlook.com 52 Mustafa`;
+    const regex = /[a-mA-Z]asa/gm;
+    const str = 'Mustafa Kaya 3000 mesto@outlook.com 52 Mustafa casa kasa masa Nasa'
     const final = []
     while ((result = regex.exec(str)) !== null) {
       if (result.index === regex.lastIndex) {
