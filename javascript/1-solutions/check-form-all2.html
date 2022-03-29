@@ -37,6 +37,7 @@
   <input type="text" id="password" class="inputs" placeholder="password">
   <input type="slug" id="slug" class="inputs" placeholder="slug">
   <script>
+
     let pattern = {
       name: /[a-z0-9]{3,}/,
       email: /([^ ]+)@([^ ]+)\.([a-z]{2,3})(\.[a-z]{2,3})?/,
@@ -58,6 +59,7 @@
         validate(pattern[e.target.id], e.target)
       })
     })
+
   </script>
 </body>
 
