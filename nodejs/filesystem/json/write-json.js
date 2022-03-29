@@ -4,7 +4,7 @@ let users = [
   {id:2,name:"Ali"},
   {id:3,name:"Hasan"}
 ]
-fs.writeFile('./users.json', JSON.stringify(users),(err) => {
+fs.appendFile('./users.json', JSON.stringify(users),(err) => {
   if (!err) {
     console.log('Done...')
   }
