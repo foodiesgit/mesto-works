@@ -3,7 +3,6 @@
 @section('content')
     <div class="row">
         <div class="col-md-9 col-lg-9 col-xl-9">
-            <!-- Post preview-->
             <div class="post-preview">
                 <a href="post.html">
                     <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
@@ -15,63 +14,18 @@
                     on September 24, 2022
                 </p>
             </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to
-                        waste any of mine.</h2>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on September 18, 2022
-                </p>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">Science has not yet mastered prophecy</h2>
-                    <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next
-                        ten.</h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on August 24, 2022
-                </p>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">Failure is not an option</h2>
-                    <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty
-                        to future generations.</h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on July 8, 2022
-                </p>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts
-                    →</a></div>
         </div>
         <div class="col-md-3 col-lg-3 col-xl-3">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Category</span>
-                    <span class="badge bg-danger">0</span>
-                </li>
-            </ul>
+            <div class="list-group">
+                @isset($categories)
+                    @foreach ($categories as $item)
+                        <a href="" class="list-group-item list-group-item-action d-flex justify-content-between">
+                            <span>{{ $item->name }}</span>
+                            <span class="badge bg-danger">0</span>
+                        </a>
+                    @endforeach
+                @endisset
+            </div>
         </div>
     </div>
 @stop

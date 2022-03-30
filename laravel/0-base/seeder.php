@@ -37,3 +37,14 @@ class UsersSeeder extends Seeder
         ]);
     }
 }
+
+//or
+$data = ['Sport','Education','Life'];
+foreach ($data as $item) {
+    DB::table('categories')->insert([
+        "name" => $item,
+        "slug" => Str::slug($item),
+        "created_at" => now(),
+        "updated_at" => now()
+    ]);
+}

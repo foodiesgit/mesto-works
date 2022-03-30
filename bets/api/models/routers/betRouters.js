@@ -27,7 +27,7 @@ const Ides = require('../schemas/idesSc')
 //     //halftime----------------
 //       let halftimescors = final.filter(item => item.period === 'Halftime')
 //       if (halftimescors.length > 0) {
-       
+
 //         let halftimebets = await conn.query('SELECT id, betid, scoreid, matches, games, options FROM bets WHERE state = ? AND games = ?',['Aktif', 'İlk Yarı Bahsi'])
 //         if (halftimebets.length > 0) {
 //           let homeresult = halftimebets[0].filter(item1 => {return halftimescors.some(item2 => (item2.matches.trim() === item1.matches.trim()))})
@@ -698,7 +698,7 @@ const Ides = require('../schemas/idesSc')
 //       ]
 //     //halftime----------------
 //       if (halftimescors.length > 0) {
-       
+
 //         let halftimebets = await Betsummaries.find('SELECT id, betid, user, scoreid, matches, games, options FROM bets WHERE state = ? AND games = ?',['Aktif', 'Maç Bahsi'])
 //         if (halftimebets.length > 0) {
 //           let homeresult = halftimebets[0].filter(item1 => {return halftimescors.some(item2 => (item2.matches.trim() === item1.matches.trim()))})
@@ -828,16 +828,16 @@ router.post('/addbet', wrapAsync(async (req, res) => {
       stream: newSummary.stream,
       role: req.session.auth.role
     })
-    const checkcredit = await Users.findOne({user: req.session.auth.user}, 'credit creditremain')
+    const checkcredit = await Users.findOne({ user: req.session.auth.user }, 'credit creditremain')
     if (newSummary.amount > checkcredit.creditremain) {
       return res.json({ error: 'Yetersiz Bakiye' })
     } else {
       await Bets.insertMany(newBets)
       await betSummary.save()
-      await Users.updateOne({user: req.session.auth.user},{$inc: {creditremain: - newSummary.amount}})
-      await Ides.updateOne({}, {$inc: {sumid: + 1}, $set:{betid: incbetid}})
-      
-      const result = await Users.findOne({user: req.session.auth.user}, 'user admin superadmin creditremain')
+      await Users.updateOne({ user: req.session.auth.user }, { $inc: { creditremain: - newSummary.amount } })
+      await Ides.updateOne({}, { $inc: { sumid: + 1 }, $set: { betid: incbetid } })
+
+      const result = await Users.findOne({ user: req.session.auth.user }, 'user admin superadmin creditremain')
       const gamelog = new Gamelogs({
         gameid: ides.sumid,
         user: result.user,
@@ -855,10 +855,10 @@ router.post('/addbet', wrapAsync(async (req, res) => {
   }
 }))
 router.put('/cancelbet', wrapAsync(async (req, res) => {
-  await Betsummaries.updateOne({sumid: req.body.betsum.sumid}, {$set: {state:'iptal'}})
-  await Bets.updateMany({betid: req.body.betsum.betid}, {$set: {state:'iptal'}})
-  await Users.updateOne({user: req.body.betsum.user}, {$inc: {creditremain: + req.body.betsum.amount}})
-  const getusers = await Users.findOne({user: req.body.betsum.user}, 'creditremain')
+  await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $set: { state: 'iptal' } })
+  await Bets.updateMany({ betid: req.body.betsum.betid }, { $set: { state: 'iptal' } })
+  await Users.updateOne({ user: req.body.betsum.user }, { $inc: { creditremain: + req.body.betsum.amount } })
+  const getusers = await Users.findOne({ user: req.body.betsum.user }, 'creditremain')
   const gamelog = new Gamelogs({
     gameid: req.body.betsum.sumid,
     user: req.body.betsum.user,
@@ -874,14 +874,14 @@ router.put('/cancelbet', wrapAsync(async (req, res) => {
   res.json({ code: 200, message: 'Kupon iptal edildi' })
 }))
 router.put('/returnbet', wrapAsync(async (req, res) => {
-  const ccr = await Users.findOne({user: req.body.betsum.user}, 'creditremain')
+  const ccr = await Users.findOne({ user: req.body.betsum.user }, 'creditremain')
   if (req.body.betsum.amount > ccr.creditremain) {
-    res.json({code: 401})
+    res.json({ code: 401 })
   } else {
-    await Betsummaries.updateOne({sumid: req.body.betsum.sumid}, {$set: {state:'Aktif'}})
-    await Bets.updateMany({betid: req.body.betsum.betid}, {$set: {state:'Aktif'}})
-    await Users.updateOne({user: req.body.betsum.user}, {$inc: {creditremain: - req.body.betsum.amount}})
-    const lcr = await Users.findOne({user: req.body.betsum.user},'creditremain')
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $set: { state: 'Aktif' } })
+    await Bets.updateMany({ betid: req.body.betsum.betid }, { $set: { state: 'Aktif' } })
+    await Users.updateOne({ user: req.body.betsum.user }, { $inc: { creditremain: - req.body.betsum.amount } })
+    const lcr = await Users.findOne({ user: req.body.betsum.user }, 'creditremain')
     const gamelog = new Gamelogs({
       gameid: req.body.betsum.sumid,
       user: req.body.betsum.user,
@@ -898,9 +898,9 @@ router.put('/returnbet', wrapAsync(async (req, res) => {
   }
 }))
 router.get('/lastcoupon', wrapAsync(async (req, res) => {
-  const result = await Betsummaries.findOne({$and: [{user: req.session.auth.user}, {stream: 'Bülten'}, {state: 'Aktif'}]}).sort({_id:-1}).limit(1)
+  const result = await Betsummaries.findOne({ $and: [{ user: req.session.auth.user }, { stream: 'Bülten' }, { state: 'Aktif' }] }).sort({ _id: -1 }).limit(1)
   if (result) {
-    const result2 = await Bets.find({sumid: result.sumid}, 'code matches games options rate scoreid eventtime')
+    const result2 = await Bets.find({ sumid: result.sumid }, 'code matches games options rate scoreid eventtime')
     res.json(result2)
   } else {
     res.json({ status: 401 })
@@ -911,41 +911,41 @@ router.post('/betsummary', wrapAsync(async (req, res) => {
   const end = moment().format('YYYY-MM-DD 24:00:00')
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     if (req.body.statebox === 'Aktif') {
-      const betsummary = await Betsummaries.find({user: req.session.auth.user, state: 'Aktif'}).sort({_id: -1})
+      const betsummary = await Betsummaries.find({ user: req.session.auth.user, state: 'Aktif' }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
       if (req.body.statebox === 'Hepsi') {
-        const betsummary = await Betsummaries.find({user: req.session.auth.user, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}}).sort({_id: -1})
+        const betsummary = await Betsummaries.find({ user: req.session.auth.user, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }).sort({ _id: -1 })
         res.json({ betsummary })
       } else {
-        const betsummary = await Betsummaries.find({user: req.session.auth.user, date: {$gte: start, $lt: end}, state: req.body.statebox}).sort({_id: -1})
+        const betsummary = await Betsummaries.find({ user: req.session.auth.user, date: { $gte: start, $lt: end }, state: req.body.statebox }).sort({ _id: -1 })
         res.json({ betsummary })
       }
     }
   } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
       if (req.body.statebox === 'Aktif') {
-        const betsummary = await Betsummaries.find({$or:[{user: req.session.auth.user, state: 'Aktif'},{admin: req.session.auth.user, state: 'Aktif'}]}).sort({sumid: -1})
+        const betsummary = await Betsummaries.find({ $or: [{ user: req.session.auth.user, state: 'Aktif' }, { admin: req.session.auth.user, state: 'Aktif' }] }).sort({ sumid: -1 })
         res.json({ betsummary })
       } else {
         if (req.body.statebox === 'Hepsi') {
-          const betsummary = await Betsummaries.find({$or:[{user: req.session.auth.user, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}},{admin: req.session.auth.user, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}}]}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ $or: [{ user: req.session.auth.user, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }, { admin: req.session.auth.user, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }] }).sort({ sumid: -1 })
           res.json({ betsummary })
         } else {
-          const betsummary = await Betsummaries.find({$or:[{user: req.session.auth.user, date: {$gte: start, $lt: end}, state:req.body.statebox},{admin: req.session.auth.user, date: {$gte: start, $lt: end}, state:req.body.statebox}]}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ $or: [{ user: req.session.auth.user, date: { $gte: start, $lt: end }, state: req.body.statebox }, { admin: req.session.auth.user, date: { $gte: start, $lt: end }, state: req.body.statebox }] }).sort({ sumid: -1 })
           res.json({ betsummary })
         }
       }
     } else {
       if (req.body.statebox === 'Aktif') {
-        const betsummary = await Betsummaries.find({user: req.body.userbox, state: 'Aktif'}).sort({sumid: -1})
+        const betsummary = await Betsummaries.find({ user: req.body.userbox, state: 'Aktif' }).sort({ sumid: -1 })
         res.json({ betsummary })
       } else {
         if (req.body.statebox === 'Hepsi') {
-          const betsummary = await Betsummaries.find({user: req.body.userbox, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ user: req.body.userbox, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }).sort({ sumid: -1 })
           res.json({ betsummary })
         } else {
-          const betsummary = await Betsummaries.find({user: req.body.userbox, state: req.body.statebox}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ user: req.body.userbox, state: req.body.statebox }).sort({ sumid: -1 })
           res.json({ betsummary })
         }
       }
@@ -953,83 +953,83 @@ router.post('/betsummary', wrapAsync(async (req, res) => {
   } else if (req.session.auth.role === 'Admin') {
     if (req.body.userbox === 'Üyeler') {
       if (req.body.statebox === 'Aktif') {
-        const betsummary = await Betsummaries.find({$or:[{admin: req.session.auth.user, state: 'Aktif'},{superadmin: req.session.auth.user, state: 'Aktif'}]}).sort({sumid: -1})
+        const betsummary = await Betsummaries.find({ $or: [{ admin: req.session.auth.user, state: 'Aktif' }, { superadmin: req.session.auth.user, state: 'Aktif' }] }).sort({ sumid: -1 })
         res.json({ betsummary })
       } else {
         if (req.body.statebox === 'Hepsi') {
-          const betsummary = await Betsummaries.find({$or:[{admin: req.session.auth.user, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}},{superadmin: req.session.auth.user, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}}]}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ $or: [{ admin: req.session.auth.user, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }, { superadmin: req.session.auth.user, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }] }).sort({ sumid: -1 })
           res.json({ betsummary })
         } else {
-          const betsummary = await Betsummaries.find({$or:[{admin: req.session.auth.user, date: {$gte: start, $lt: end}, state:req.body.statebox},{superadmin: req.session.auth.user, date: {$gte: start, $lt: end}, state:req.body.statebox}]}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ $or: [{ admin: req.session.auth.user, date: { $gte: start, $lt: end }, state: req.body.statebox }, { superadmin: req.session.auth.user, date: { $gte: start, $lt: end }, state: req.body.statebox }] }).sort({ sumid: -1 })
           res.json({ betsummary })
         }
       }
     } else {
       if (req.body.statebox === 'Aktif') {
-        const betsummary = await Betsummaries.find({$or:[{user:req.body.userbox, state: 'Aktif'},{admin:req.body.userbox, state: 'Aktif'}]}).sort({sumid: -1})
+        const betsummary = await Betsummaries.find({ $or: [{ user: req.body.userbox, state: 'Aktif' }, { admin: req.body.userbox, state: 'Aktif' }] }).sort({ sumid: -1 })
         res.json({ betsummary })
       } else {
         if (req.body.statebox === 'Hepsi') {
-          const betsummary = await Betsummaries.find({$or:[{user:req.body.userbox, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}},{admin:req.body.userbox, date: {$gte: start, $lt: end}, state:{$ne:'iptal'}}]}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ $or: [{ user: req.body.userbox, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }, { admin: req.body.userbox, date: { $gte: start, $lt: end }, state: { $ne: 'iptal' } }] }).sort({ sumid: -1 })
           res.json({ betsummary })
         } else {
-          const betsummary = await Betsummaries.find({$or:[{user:req.body.userbox, date: {$gte: start, $lt: end}, state:req.body.statebox},{admin:req.body.userbox, date: {$gte: start, $lt: end}, state:req.body.statebox}]}).sort({sumid: -1})
+          const betsummary = await Betsummaries.find({ $or: [{ user: req.body.userbox, date: { $gte: start, $lt: end }, state: req.body.statebox }, { admin: req.body.userbox, date: { $gte: start, $lt: end }, state: req.body.statebox }] }).sort({ sumid: -1 })
           res.json({ betsummary })
         }
       }
     }
   } else {
-    const betsummary = await Betsummaries.find({ state:'Aktif' }).sort({_id: -1})
+    const betsummary = await Betsummaries.find({ state: 'Aktif' }).sort({ _id: -1 })
     res.json({ betsummary })
   }
 }))
 router.get('/betsummary/:id', wrapAsync(async (req, res) => {
   betref = req.params.id
-  const bets = await Bets.find({sumid: req.params.id}).sort({_id: -1})
+  const bets = await Bets.find({ sumid: req.params.id }).sort({ _id: -1 })
   res.json({ bets: bets })
 }))
 router.post('/betsummary/quickdatefilter', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     if (req.body.statebox === 'Hepsi') {
-      const datefilter = await Betsummaries.find({user: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     } else {
-      const datefilter = await Betsummaries.find({user: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:req.body.statebox}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     }
-  } else if (req.session.auth.role === 'Subadmin'){
+  } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await Betsummaries.find({$or :[{user: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}},{admin: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ user: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }, { admin: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await Betsummaries.find({$or:[{user: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:req.body.statebox},{admin: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:req.body.statebox}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ user: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }, { admin: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     } else {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await Betsummaries.find({user: req.body.userbox, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ user: req.body.userbox, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await Betsummaries.find({user: req.body.userbox, date:  {$gte: req.body.start, $lt: req.body.end}, state: req.body.statebox}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ user: req.body.userbox, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     }
   } else {
     if (req.body.userbox === 'Üyeler') {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await Betsummaries.find({$or :[{admin: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}},{superadmin: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ admin: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }, { superadmin: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await Betsummaries.find({$or:[{admin: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:req.body.statebox},{superadmin: req.session.auth.user, date:  {$gte: req.body.start, $lt: req.body.end}, state:req.body.statebox}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ admin: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }, { superadmin: req.session.auth.user, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     } else {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await Betsummaries.find({$or :[{user: req.body.userbox, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}},{admin: req.body.userbox, date:  {$gte: req.body.start, $lt: req.body.end}, state:{$ne: 'iptal'}}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ user: req.body.userbox, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }, { admin: req.body.userbox, date: { $gte: req.body.start, $lt: req.body.end }, state: { $ne: 'iptal' } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await Betsummaries.find({$or:[{user: req.body.userbox, date:  {$gte: req.body.start, $lt: req.body.end}, state:req.body.statebox},{admin: req.body.userbox, date:  {$gte: req.body.start, $lt: req.body.end}, state:req.body.statebox}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ user: req.body.userbox, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }, { admin: req.body.userbox, date: { $gte: req.body.start, $lt: req.body.end }, state: req.body.statebox }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     }
@@ -1038,45 +1038,45 @@ router.post('/betsummary/quickdatefilter', wrapAsync(async (req, res) => {
 router.post('/betsummary/datefilter', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     if (req.body.statebox === 'Hepsi') {
-      const datefilter = await Betsummaries.find({user: req.session.auth.user, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.session.auth.user, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     } else {
-      const datefilter = await Betsummaries.find({user: req.session.auth.user, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.session.auth.user, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     }
-  } else if(req.session.auth.role === 'Subadmin'){
+  } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await Betsummaries.find({$or: [{user: req.session.auth.user, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}, {admin: req.session.auth.user, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ user: req.session.auth.user, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }, { admin: req.session.auth.user, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await Betsummaries.find({$or: [{user: req.session.auth.user, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}, {admin: req.session.auth.user, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}]}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ $or: [{ user: req.session.auth.user, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }, { admin: req.session.auth.user, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     } else {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await Betsummaries.find({user: req.session.auth.user, state:{$ne:'iptal'}, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ user: req.session.auth.user, state: { $ne: 'iptal' }, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await Betsummaries.find({user: req.session.auth.user, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+        const datefilter = await Betsummaries.find({ user: req.session.auth.user, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     }
   } else {
     if (req.body.userbox === 'Üyeler') {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await await Betsummaries.find({$or: [{admin: req.session.auth.user, state: {$ne:'iptal'}, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}, {superadmin: req.session.auth.user, state: {$ne:'iptal'}, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}]}).sort({_id: -1})
+        const datefilter = await await Betsummaries.find({ $or: [{ admin: req.session.auth.user, state: { $ne: 'iptal' }, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }, { superadmin: req.session.auth.user, state: { $ne: 'iptal' }, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await await Betsummaries.find({$or: [{admin: req.session.auth.user, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}, {superadmin: req.session.auth.user, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}]}).sort({_id: -1})
+        const datefilter = await await Betsummaries.find({ $or: [{ admin: req.session.auth.user, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }, { superadmin: req.session.auth.user, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     } else {
       if (req.body.statebox === 'Hepsi') {
-        const datefilter = await await Betsummaries.find({$or: [{user: req.body.userbox, state: {$ne:'iptal'}, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}, {admin: req.body.userbox, state: {$ne:'iptal'}, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}]}).sort({_id: -1})
+        const datefilter = await await Betsummaries.find({ $or: [{ user: req.body.userbox, state: { $ne: 'iptal' }, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }, { admin: req.body.userbox, state: { $ne: 'iptal' }, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       } else {
-        const datefilter = await await Betsummaries.find({$or: [{user: req.body.userbox, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}, {admin: req.body.userbox, state: req.body.statebox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}]}).sort({_id: -1})
+        const datefilter = await await Betsummaries.find({ $or: [{ user: req.body.userbox, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }, { admin: req.body.userbox, state: req.body.statebox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }] }).sort({ _id: -1 })
         res.json({ code: 200, datefilter: datefilter })
       }
     }
@@ -1084,88 +1084,88 @@ router.post('/betsummary/datefilter', wrapAsync(async (req, res) => {
 }))
 router.post('/paycupons', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Subadmin') {
-    const betsummary = await Betsummaries.find({user: req.session.auth.user, adminpay: 'no', state:'Kazandi'}).sort({_id: -1})
+    const betsummary = await Betsummaries.find({ user: req.session.auth.user, adminpay: 'no', state: 'Kazandi' }).sort({ _id: -1 })
     res.json({ betsummary })
   } else if (req.session.auth.role === 'Admin') {
     if (req.body.userbox === 'Üyeler') {
-      const betsummary = await Betsummaries.find({$or:[{admin: req.session.auth.user, adminpay: 'no', state:'Kazandi'},{superadmin: req.session.auth.user, adminpay: 'no', state:'Kazandi'}]}).sort({_id: -1})
+      const betsummary = await Betsummaries.find({ $or: [{ admin: req.session.auth.user, adminpay: 'no', state: 'Kazandi' }, { superadmin: req.session.auth.user, adminpay: 'no', state: 'Kazandi' }] }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
-      const betsummary = await Betsummaries.find({$or:[{user: req.body.userbox, adminpay: 'no', state:'Kazandi'},{admin: req.body.userbox, adminpay: 'no', state:'Kazandi'}]}).sort({_id: -1})
+      const betsummary = await Betsummaries.find({ $or: [{ user: req.body.userbox, adminpay: 'no', state: 'Kazandi' }, { admin: req.body.userbox, adminpay: 'no', state: 'Kazandi' }] }).sort({ _id: -1 })
       res.json({ betsummary })
     }
   }
 }))
 router.post('/betsummarysingle', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
-    const betsummary = await Betsummaries.find({user: req.session.auth.user, state:'Aktif'}).sort({_id: -1})
+    const betsummary = await Betsummaries.find({ user: req.session.auth.user, state: 'Aktif' }).sort({ _id: -1 })
     res.json({ betsummary })
-  }else if (req.session.auth.role === 'Subadmin') {
+  } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
-      const betsummary = await Betsummaries.find({$or:[{user: req.session.auth.user, state:'Aktif'},{admin: req.session.auth.user, state:'Aktif'}]}).sort({_id: -1})
+      const betsummary = await Betsummaries.find({ $or: [{ user: req.session.auth.user, state: 'Aktif' }, { admin: req.session.auth.user, state: 'Aktif' }] }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
-      const betsummary = await Betsummaries.find({user: req.session.auth.user, state:'Aktif'}).sort({_id: -1})
+      const betsummary = await Betsummaries.find({ user: req.session.auth.user, state: 'Aktif' }).sort({ _id: -1 })
       res.json({ betsummary })
     }
-  }else if (req.session.auth.role === 'Admin') {
+  } else if (req.session.auth.role === 'Admin') {
     if (req.body.userbox === 'Üyeler') {
-      const betsummary = await Betsummaries.find({$or:[{admin: req.session.auth.user, state:'Aktif'},{superadmin: req.session.auth.user, state:'Aktif'}]}).sort({_id: -1})
+      const betsummary = await Betsummaries.find({ $or: [{ admin: req.session.auth.user, state: 'Aktif' }, { superadmin: req.session.auth.user, state: 'Aktif' }] }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
-      const betsummary = await Betsummaries.find({$or:[{user: req.session.auth.user, state:'Aktif'},{admin: req.session.auth.user, state:'Aktif'}]}).sort({_id: -1})
+      const betsummary = await Betsummaries.find({ $or: [{ user: req.session.auth.user, state: 'Aktif' }, { admin: req.session.auth.user, state: 'Aktif' }] }).sort({ _id: -1 })
       res.json({ betsummary })
     }
   } else {
-    const betsummary = await Betsummaries.find({state:'Aktif'}).sort({_id: -1})
+    const betsummary = await Betsummaries.find({ state: 'Aktif' }).sort({ _id: -1 })
     res.json({ betsummary })
   }
 }))
 router.post('/betsummarynextgoals', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     const betsid = await Bets.aggregate([
-      {$match: {user: req.session.auth.user, state: 'Aktif', games:{regex: '1. Gol'}}},
-      {$group: {_id: null, count:{$sum: '$betid'}}}
+      { $match: { user: req.session.auth.user, state: 'Aktif', games: { regex: '1. Gol' } } },
+      { $group: { _id: null, count: { $sum: '$betid' } } }
     ])
     if (betsid[0]) {
       const getid = betsid[0].map(item => item.betid)
-      const betsummary = await Bets.find({id:{$in: getid}}).sort({_id: -1})
+      const betsummary = await Bets.find({ id: { $in: getid } }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
       res.json({ betsummary: null })
     }
   } else if (req.session.auth.role === 'Subadmin') {
     const betsid = await Bets.aggregate([
-      {$match: {$or: [{user: req.session.auth.user, state: 'Aktif', games:{regex: '1. Gol'}},{admin: req.session.auth.user, state: 'Aktif', games:{regex: '1. Gol'}}]}},
-      {$group: {_id: null, count:{$sum: '$betid'}}}
+      { $match: { $or: [{ user: req.session.auth.user, state: 'Aktif', games: { regex: '1. Gol' } }, { admin: req.session.auth.user, state: 'Aktif', games: { regex: '1. Gol' } }] } },
+      { $group: { _id: null, count: { $sum: '$betid' } } }
     ])
     if (betsid[0]) {
       const getid = betsid[0].map(item => item.betid)
-      const betsummary = await Bets.find({id:{$in: getid}}).sort({_id: -1})
+      const betsummary = await Bets.find({ id: { $in: getid } }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
       res.json({ betsummary: null })
     }
   } else if (req.session.auth.role === 'Admin') {
     const betsid = await Bets.aggregate([
-      {$match: {$or: [{admin: req.session.auth.user, state: 'Aktif', games:{regex: '1. Gol'}},{superadmin: req.session.auth.user, state: 'Aktif', games:{regex: '1. Gol'}}]}},
-      {$group: {_id: null, count:{$sum: '$betid'}}}
+      { $match: { $or: [{ admin: req.session.auth.user, state: 'Aktif', games: { regex: '1. Gol' } }, { superadmin: req.session.auth.user, state: 'Aktif', games: { regex: '1. Gol' } }] } },
+      { $group: { _id: null, count: { $sum: '$betid' } } }
     ])
     if (betsid[0]) {
       const getid = betsid[0].map(item => item.betid)
-      const betsummary = await Bets.find({id:{$in: getid}}).sort({_id: -1})
+      const betsummary = await Bets.find({ id: { $in: getid } }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
       res.json({ betsummary: null })
     }
   } else {
     const betsid = await Bets.aggregate([
-      {$match: {state: 'Aktif', games:{regex: '1. Gol'}}},
-      {$group: {_id: null, count:{$sum: '$betid'}}}
+      { $match: { state: 'Aktif', games: { regex: '1. Gol' } } },
+      { $group: { _id: null, count: { $sum: '$betid' } } }
     ])
     if (betsid[0]) {
       const getid = betsid[0].map(item => item.betid)
-      const betsummary = await Bets.find({id:{$in: getid}}).sort({_id: -1})
+      const betsummary = await Bets.find({ id: { $in: getid } }).sort({ _id: -1 })
       res.json({ betsummary })
     } else {
       res.json({ betsummary: null })
@@ -1173,111 +1173,111 @@ router.post('/betsummarynextgoals', wrapAsync(async (req, res) => {
   }
 }))
 router.post('/betsummarycode', wrapAsync(async (req, res) => {
-  const betsummary = await Betsummaries.find({sumid: req.body.sumid})
+  const betsummary = await Betsummaries.find({ sumid: req.body.sumid })
   res.json({ betsummary })
 }))
 router.put('/setbetstate', wrapAsync(async (req, res) => {
-    let rbb = req.body.betdetail
-    const result = await Bets.findOne({betid: rbb.betid})
-    await Bets.updateOne({betid:rbb.betid}, {$set:{state:rbb.state}})
-    if (result.state === 'Aktif' && rbb.state === 'Kaybetti') {
-      await Betsummaries.updateOne({sumid:req.body.betsum.sumid}, {$inc:{betscountremain: + 1, lostcount: + 1}})
-      res.json({ code: 200 })
-    } else if ((result.state === 'Aktif' && rbb.state === 'Kazandi') || (result.state === 'Aktif' && rbb.state === 'iade')) {
-      await Betsummaries.updateOne({sumid:req.body.betsum.sumid}, {$inc:{betscountremain: + 1, woncount: + 1}})
-      res.json({ code: 200 })
-    } else if (result.state === 'Kaybetti' && rbb.state === 'Aktif') {
-      await Betsummaries.updateOne({sumid:req.body.betsum.sumid}, {$inc:{betscountremain: - 1, lostcount: - 1}})
-      res.json({ code: 200 })      
-    } else if ((result.state === 'Kazandi' && rbb.state === 'Aktif') || (result.state === 'iade' && rbb.state === 'Aktif')) {
-      await Betsummaries.updateOne({sumid:req.body.betsum.sumid}, {$inc:{betscountremain: - 1, woncount: - 1}})
-      res.json({ code: 200 })  
-    } else if (result.state === 'Kaybetti' && rbb.state === 'Kazandi'){
-      await Betsummaries.updateOne({sumid:req.body.betsum.sumid}, {$inc:{lostcount: - 1, woncount: + 1}})
-      res.json({ code: 200 })
-    } else if ((result.state === 'Kazandi' && rbb.state === 'Kaybetti') || (result.state === 'iade' && rbb.state === 'Kaybetti')) {
-      await Betsummaries.updateOne({sumid:req.body.betsum.sumid}, {$inc:{lostcount: + 1, woncount: - 1}})
-      res.json({ code: 200 }) 
-    } else if (result.state === 'iade' && rbb.state === 'Kazandi') {
-      await Betsummaries.updateOne({sumid:rbb.id, state: 'sumiade'})
-      res.json({ code: 200 })
-    } else {
-      await Betsummaries.updateOne({sumid:req.body.betsum.sumid, betscountremain: betscountremain})
-      res.json({ code: 200 })
-    }
+  let rbb = req.body.betdetail
+  const result = await Bets.findOne({ betid: rbb.betid })
+  await Bets.updateOne({ betid: rbb.betid }, { $set: { state: rbb.state } })
+  if (result.state === 'Aktif' && rbb.state === 'Kaybetti') {
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $inc: { betscountremain: + 1, lostcount: + 1 } })
+    res.json({ code: 200 })
+  } else if ((result.state === 'Aktif' && rbb.state === 'Kazandi') || (result.state === 'Aktif' && rbb.state === 'iade')) {
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $inc: { betscountremain: + 1, woncount: + 1 } })
+    res.json({ code: 200 })
+  } else if (result.state === 'Kaybetti' && rbb.state === 'Aktif') {
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $inc: { betscountremain: - 1, lostcount: - 1 } })
+    res.json({ code: 200 })
+  } else if ((result.state === 'Kazandi' && rbb.state === 'Aktif') || (result.state === 'iade' && rbb.state === 'Aktif')) {
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $inc: { betscountremain: - 1, woncount: - 1 } })
+    res.json({ code: 200 })
+  } else if (result.state === 'Kaybetti' && rbb.state === 'Kazandi') {
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $inc: { lostcount: - 1, woncount: + 1 } })
+    res.json({ code: 200 })
+  } else if ((result.state === 'Kazandi' && rbb.state === 'Kaybetti') || (result.state === 'iade' && rbb.state === 'Kaybetti')) {
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid }, { $inc: { lostcount: + 1, woncount: - 1 } })
+    res.json({ code: 200 })
+  } else if (result.state === 'iade' && rbb.state === 'Kazandi') {
+    await Betsummaries.updateOne({ sumid: rbb.id, state: 'sumiade' })
+    res.json({ code: 200 })
+  } else {
+    await Betsummaries.updateOne({ sumid: req.body.betsum.sumid, betscountremain: betscountremain })
+    res.json({ code: 200 })
+  }
 }))
 router.put('/setbetsummarystate', wrapAsync(async (req, res) => {
   const betsum = req.body.betsum
   const betstate = req.body.betstate
   let ope = ''
   let des = ''
-  const cbss = await Betsummaries.findOne({sumid:betsum.sumid},'sumid user admin state role adminpay')
-  const finduser = await Users.findOne({$or: [{user:betsum.admin}, {user:betsum.superadmin}]},'user admin autopay')
-  await Betsummaries.updateOne({sumid:betsum.sumid},{$set:{state:betstate}})
+  const cbss = await Betsummaries.findOne({ sumid: betsum.sumid }, 'sumid user admin state role adminpay')
+  const finduser = await Users.findOne({ $or: [{ user: betsum.admin }, { user: betsum.superadmin }] }, 'user admin autopay')
+  await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { state: betstate } })
   if (cbss.state === 'Aktif' && betstate === 'Kaybetti') {
-    res.json({ message:'Kaybetti' })
+    res.json({ message: 'Kaybetti' })
   } else if (cbss.state === 'Aktif' && betstate === 'iade') {
-    await Users.updateOne({user:betsum.user},{$inc:{creditremain: + betsum.amount}})
+    await Users.updateOne({ user: betsum.user }, { $inc: { creditremain: + betsum.amount } })
     ope = 'Eklendi'
     des = 'iade'
     insertGameLog(betsum.user, finduser.user, finduser.admin, betsum.amount, ope, des)
   } else if (cbss.state === 'Kaybetti' && betstate === 'Aktif') {
-    res.json({ code:200 })
+    res.json({ code: 200 })
   } else if ((cbss.state === 'iade' && betstate === 'Aktif') || (cbss.state === 'iade' && betstate === 'Kaybetti')) {
-    await Users.updateOne({user:betsum.user},{$inc:{creditremain: + betsum.amount}})
+    await Users.updateOne({ user: betsum.user }, { $inc: { creditremain: + betsum.amount } })
     ope = 'Eksildi'
     des = 'Düzeltme'
     insertGameLog(betsum.user, finduser.user, finduser.admin, betsum.amount, ope, des)
   } else if (betstate === 'Kazandi') {
     if (finduser.autopay == 1) {
-      const cbs = await Bets.findOne({sumid:betsum.sumid, state: 'iade'})
+      const cbs = await Bets.findOne({ sumid: betsum.sumid, state: 'iade' })
       if (cbs) {
-        const calcDraw = await Bets.findOne({betid:betsum.sumid, state: 'Kazandi'}, 'rate')
+        const calcDraw = await Bets.findOne({ betid: betsum.sumid, state: 'Kazandi' }, 'rate')
         let newrate = calcDraw.reduce((acc, item) => {
           return acc * item.rate
         }, 1)
         drawwon = (calcDraw.rate * betsum.amount).toFixed(2)
         setTimeout(async () => {
-          await Betsummaries.updateOne({sumid:betsum.sumid},{$set:{adminpay: 'yes'}})
-          await Betsummaries.updateOne({sumid:betsum.sumid},{$set:{rate: newrate, earn: drawwon}})
-          await Users.updateOne({user:betsum.user},{$inc:{creditremain: + drawwon}})
+          await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { adminpay: 'yes' } })
+          await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { rate: newrate, earn: drawwon } })
+          await Users.updateOne({ user: betsum.user }, { $inc: { creditremain: + drawwon } })
           ope = 'Eklendi'
           des = 'Kazandi'
           insertGameLog(betsum.user, finduser.user, finduser.admin, drawwon, ope, des)
         }, 20)
       } else {
-        await Betsummaries.updateOne({sumid:betsum.sumid}, {$set:{adminpay: 'yes'}})
-        await Users.updateOne({user:betsum.user}, {$inc:{creditremain: + betsum.earn}})
+        await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { adminpay: 'yes' } })
+        await Users.updateOne({ user: betsum.user }, { $inc: { creditremain: + betsum.earn } })
         ope = 'Eklendi'
         des = 'Kazandi'
         insertGameLog(betsum.user, finduser.user, finduser.admin, betsum.earn, ope, des)
       }
     } else {
-      res.json({ code:200 })
+      res.json({ code: 200 })
     }
   } else if ((cbss.state === 'Kazandi' && betstate === 'Aktif') || (cbss.state === 'Kazandi' && betstate === 'Kaybetti')) {
-    await Betsummaries.updateOne({sumid:betsum.sumid},{$set:{adminpay: 'no', userpay:'no'}})
-    const oldearn = await Betsummaries.findOne({sumid:betsum.sumid}, 'earn')
+    await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { adminpay: 'no', userpay: 'no' } })
+    const oldearn = await Betsummaries.findOne({ sumid: betsum.sumid }, 'earn')
     if (req.session.auth.autopay === 1) {
-      await Users.updateOne({user:betsum.user},{$inc:{creditremain: - oldearn.earn}})
+      await Users.updateOne({ user: betsum.user }, { $inc: { creditremain: - oldearn.earn } })
       ope = 'Eksildi'
       des = 'Düzeltme'
       insertGameLog(betsum.user, cbss.admin, finduser.admin, oldearn.earn, ope, des)
     } else {
       if (cbss.adminpay === 'yes') {
-        await Users.updateOne({user:betsum.user},{$inc:{creditremain: - oldearn.earn}})
+        await Users.updateOne({ user: betsum.user }, { $inc: { creditremain: - oldearn.earn } })
         ope = 'Eksildi'
         des = 'Düzeltme'
         insertGameLog(betsum.user, finduser.user, finduser.admin, oldearn.earn, ope, des)
       } else {
-        res.json({ code:200 })
+        res.json({ code: 200 })
       }
     }
   } else {
     res.json({ message: 'active' })
   }
   async function insertGameLog(user, admin, superadmin, earn, ope, des) {
-    const users = await Users.findOne({user: betsum.user}, 'creditremain')
+    const users = await Users.findOne({ user: betsum.user }, 'creditremain')
     const gamelog = new Gamelogs({
       gameid: betsum.sumid,
       user,
@@ -1296,39 +1296,39 @@ router.put('/setbetsummarystate', wrapAsync(async (req, res) => {
 router.put('/paymentbet', wrapAsync(async (req, res) => {
   const betsum = req.body.betsum
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Subadmin') {
-    await Betsummaries.updateOne({sumid: betsum.sumid},{$set:{userpay: 'yes'}})
+    await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { userpay: 'yes' } })
     res.json({ code: 200 })
   } else {
-    const cbss = await Betsummaries.findOne({sumid:betsum.sumid}, 'sumid state role adminpay')
-    const cbs = await Betsummaries.findOne({sumid:betsum.sumid, state:'iade'})
+    const cbss = await Betsummaries.findOne({ sumid: betsum.sumid }, 'sumid state role adminpay')
+    const cbs = await Betsummaries.findOne({ sumid: betsum.sumid, state: 'iade' })
     if (cbs) {
-      const calcDraw = await Betsummaries.findOne({sumid:betsum.sumid, state:'Kazandi'}, 'rate')
+      const calcDraw = await Betsummaries.findOne({ sumid: betsum.sumid, state: 'Kazandi' }, 'rate')
       const newrate = calcDraw.reduce(function (acc, item) {
         return acc * item.rate
       }, 1)
       const drawwon = (newrate * betsum.amount).toFixed(2)
       setTimeout(async () => {
-        await Betsummaries.updateOne({sumid:betsum.sumid},{$set:{adminpay: 'yes'}})
-        await Betsummaries.updateOne({sumid:betsum.sumid},{$set:{rate: newrate, earn: betsum.earn}})
-        await Users.updateOne({user:betsum.user},{$set:{creditremain: + drawwon}})
+        await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { adminpay: 'yes' } })
+        await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { rate: newrate, earn: betsum.earn } })
+        await Users.updateOne({ user: betsum.user }, { $set: { creditremain: + drawwon } })
         ope = 'Eklendi'
         des = 'Kazandi'
         insertGameLog(betsum.user, betsum.admin, betsum.superadmin, drawwon, ope, des)
       }, 20)
     } else {
       if (cbss.adminpay === 'no') {
-        await Betsummaries.updateOne({sumid: betsum.sumid},{$set: {adminpay: 'yes'}})
-        await Users.updateOne({user:betsum.user}, {$inc:{creditremain: + betsum.earn}})
+        await Betsummaries.updateOne({ sumid: betsum.sumid }, { $set: { adminpay: 'yes' } })
+        await Users.updateOne({ user: betsum.user }, { $inc: { creditremain: + betsum.earn } })
         ope = 'Eklendi'
         des = 'Kazandi'
         insertGameLog(betsum.user, betsum.admin, betsum.superadmin, betsum.earn, ope, des)
       } else {
-        res.json({ code:200 })
+        res.json({ code: 200 })
       }
     }
   }
   async function insertGameLog(user, admin, superadmin, earn, ope, des) {
-    const users = await Users.findOne({user: betsum.user}, 'creditremain')
+    const users = await Users.findOne({ user: betsum.user }, 'creditremain')
     const gamelog = new Gamelogs({
       gameid: betsum.sumid,
       user,
@@ -1346,37 +1346,37 @@ router.put('/paymentbet', wrapAsync(async (req, res) => {
 }))
 router.post('/detailscomission', wrapAsync(async (req, res) => {
   if (req.body.userbox === 'Üyeler') {
-    const betsummary = await Betsummaries.find({$or: [{user: req.session.auth.user, state: 'Kazandi'}, {admin: req.session.auth.user, state: 'Kazandi'}]}).sort({_id: -1})
+    const betsummary = await Betsummaries.find({ $or: [{ user: req.session.auth.user, state: 'Kazandi' }, { admin: req.session.auth.user, state: 'Kazandi' }] }).sort({ _id: -1 })
     res.json({ betsummary })
   } else {
-    const betsummary = await Betsummaries.find({user: req.body.userbox, state: 'Kazandi'}).sort({_id: -1})
+    const betsummary = await Betsummaries.find({ user: req.body.userbox, state: 'Kazandi' }).sort({ _id: -1 })
     res.json({ betsummary })
   }
 }))
 router.post('/detailscomissionquickdatefilter', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member') {
-    const datefilter = await Betsummaries.find({user: req.session.auth.user, state: 'Kazandi', date: req.body.quickdate}).sort({_id: -1})
+    const datefilter = await Betsummaries.find({ user: req.session.auth.user, state: 'Kazandi', date: req.body.quickdate }).sort({ _id: -1 })
     res.json({ code: 200, datefilter: datefilter })
   } else {
     if (req.body.userbox === 'Üyeler') {
-      const datefilter = await Betsummaries.find({user: req.session.auth.user, state: 'Kazandi', date: req.body.quickdate}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.session.auth.user, state: 'Kazandi', date: req.body.quickdate }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     } else {
-      const datefilter = await Betsummaries.find({user: req.body.userbox, state: 'Kazandi', date: req.body.quickdate}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.body.userbox, state: 'Kazandi', date: req.body.quickdate }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     }
   }
 }))
 router.post('/detailscomissiondatefilter', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member') {
-    const datefilter = await Betsummaries.find({user: req.session.auth.user, state: 'Kazandi', date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+    const datefilter = await Betsummaries.find({ user: req.session.auth.user, state: 'Kazandi', date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
     res.json({ code: 200, datefilter: datefilter })
   } else {
     if (req.body.userbox === 'Üyeler') {
-      const datefilter = await Betsummaries.find({user: req.session.auth.user, state: 'Kazandi', date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.session.auth.user, state: 'Kazandi', date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     } else {
-      const datefilter = await Betsummaries.find({user: req.body.userbox, state: 'Kazandi', date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+      const datefilter = await Betsummaries.find({ user: req.body.userbox, state: 'Kazandi', date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
       res.json({ code: 200, datefilter: datefilter })
     }
   }
@@ -1384,31 +1384,31 @@ router.post('/detailscomissiondatefilter', wrapAsync(async (req, res) => {
 router.post('/activeinfo', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     const activeinfo = await Betsummaries.aggregate([
-      {$match: {user: req.session.auth.user, state: 'Aktif'}},
-      {$group: {_id:null, activeamount: {$sum: '$amount'}, activeearn: {$sum: '$earn'}, activecount:{$sum: 1}}}])
+      { $match: { user: req.session.auth.user, state: 'Aktif' } },
+      { $group: { _id: null, activeamount: { $sum: '$amount' }, activeearn: { $sum: '$earn' }, activecount: { $sum: 1 } } }])
     res.json({ activeinfo: activeinfo[0] })
-  } else if(req.session.auth.role === 'Subadmin'){
+  } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
       const activeinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: req.session.auth.user, state: 'Aktif'},{admin: req.session.auth.user, state: 'Aktif'}]}},
-        {$group: {_id:null, activeamount: {$sum: '$amount'}, activeearn: {$sum: '$earn'}, activecount:{$sum: 1}}}])
+        { $match: { $or: [{ user: req.session.auth.user, state: 'Aktif' }, { admin: req.session.auth.user, state: 'Aktif' }] } },
+        { $group: { _id: null, activeamount: { $sum: '$amount' }, activeearn: { $sum: '$earn' }, activecount: { $sum: 1 } } }])
       res.json({ activeinfo: activeinfo[0] })
     } else {
       const activeinfo = await Betsummaries.aggregate([
-        {$match: {user: req.body.userbox, state: 'Aktif'}},
-        {$group: {_id:null, activeamount: {$sum: '$amount'}, activeearn: {$sum: '$earn'}, activecount:{$sum: 1}}}])
+        { $match: { user: req.body.userbox, state: 'Aktif' } },
+        { $group: { _id: null, activeamount: { $sum: '$amount' }, activeearn: { $sum: '$earn' }, activecount: { $sum: 1 } } }])
       res.json({ activeinfo: activeinfo[0] })
     }
   } else {
     if (req.body.userbox === 'Üyeler') {
       const activeinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{admin: req.session.auth.user, state: 'Aktif'},{superadmin: req.session.auth.user, state: 'Aktif'}]}},
-        {$group: {_id: null, activeamount: {$sum: '$amount'}, activeearn: {$sum: '$earn'}, activecount:{$sum: 1}}}])
+        { $match: { $or: [{ admin: req.session.auth.user, state: 'Aktif' }, { superadmin: req.session.auth.user, state: 'Aktif' }] } },
+        { $group: { _id: null, activeamount: { $sum: '$amount' }, activeearn: { $sum: '$earn' }, activecount: { $sum: 1 } } }])
       res.json({ activeinfo: activeinfo[0] })
     } else {
       const activeinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: req.body.userbox, state: 'Aktif'},{admin: req.body.userbox, state: 'Aktif'}]}},
-        {$group: {_id: null, activeamount: {$sum: '$amount'}, activeearn: {$sum: '$earn'}, activecount:{$sum: 1}}}])
+        { $match: { $or: [{ user: req.body.userbox, state: 'Aktif' }, { admin: req.body.userbox, state: 'Aktif' }] } },
+        { $group: { _id: null, activeamount: { $sum: '$amount' }, activeearn: { $sum: '$earn' }, activecount: { $sum: 1 } } }])
       res.json({ activeinfo: activeinfo[0] })
     }
   }
@@ -1416,31 +1416,31 @@ router.post('/activeinfo', wrapAsync(async (req, res) => {
 router.post('/woninfo', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     const woninfo = await Betsummaries.aggregate([
-      {$match: {user: req.session.auth.user, state: 'Kazandi'}},
-      {$group: {_id:null, wonamount: {$sum: '$amount'}, wonearn: {$sum: '$earn'}, woncount:{$sum: 1}}}])
+      { $match: { user: req.session.auth.user, state: 'Kazandi' } },
+      { $group: { _id: null, wonamount: { $sum: '$amount' }, wonearn: { $sum: '$earn' }, woncount: { $sum: 1 } } }])
     res.json({ woninfo: woninfo[0] })
-  } else if(req.session.auth.role === 'Subadmin'){
+  } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
       const woninfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: req.session.auth.user, state: 'Kazandi'},{admin: req.session.auth.user, state: 'Kazandi'}]}},
-        {$group: {_id:null, wonamount: {$sum: '$amount'}, wonearn: {$sum: '$earn'}, woncount:{$sum: 1}}}])
+        { $match: { $or: [{ user: req.session.auth.user, state: 'Kazandi' }, { admin: req.session.auth.user, state: 'Kazandi' }] } },
+        { $group: { _id: null, wonamount: { $sum: '$amount' }, wonearn: { $sum: '$earn' }, woncount: { $sum: 1 } } }])
       res.json({ woninfo: woninfo[0] })
     } else {
       const woninfo = await Betsummaries.aggregate([
-        {$match: {user: req.body.userbox, state: 'Kazandi'}},
-        {$group: {_id:null, wonamount: {$sum: '$amount'}, wonearn: {$sum: '$earn'}, woncount:{$sum: 1}}}])
+        { $match: { user: req.body.userbox, state: 'Kazandi' } },
+        { $group: { _id: null, wonamount: { $sum: '$amount' }, wonearn: { $sum: '$earn' }, woncount: { $sum: 1 } } }])
       res.json({ woninfo: woninfo[0] })
     }
   } else {
     if (req.body.userbox === 'Üyeler') {
       const woninfo = await Betsummaries.aggregate([
-        {$match: {$or:[{admin: req.session.auth.user, state: 'Kazandi'},{superadmin: req.session.auth.user, state: 'Kazandi'}]}},
-        {$group: {_id:null, wonamount: {$sum: '$amount'}, wonearn: {$sum: '$earn'}, woncount:{$sum: 1}}}])
+        { $match: { $or: [{ admin: req.session.auth.user, state: 'Kazandi' }, { superadmin: req.session.auth.user, state: 'Kazandi' }] } },
+        { $group: { _id: null, wonamount: { $sum: '$amount' }, wonearn: { $sum: '$earn' }, woncount: { $sum: 1 } } }])
       res.json({ woninfo: woninfo[0] })
     } else {
       const woninfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: req.body.userbox, state: 'Kazandi'},{admin: req.body.userbox, state: 'Kazandi'}]}},
-        {$group: {_id:null, wonamount: {$sum: '$amount'}, wonearn: {$sum: '$earn'}, woncount:{$sum: 1}}}])
+        { $match: { $or: [{ user: req.body.userbox, state: 'Kazandi' }, { admin: req.body.userbox, state: 'Kazandi' }] } },
+        { $group: { _id: null, wonamount: { $sum: '$amount' }, wonearn: { $sum: '$earn' }, woncount: { $sum: 1 } } }])
       res.json({ woninfo: woninfo[0] })
     }
   }
@@ -1448,31 +1448,31 @@ router.post('/woninfo', wrapAsync(async (req, res) => {
 router.post('/lostinfo', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     const lostinfo = await Betsummaries.aggregate([
-      {$match: {user: req.session.auth.user, state: 'Kaybetti'}},
-      {$group: {_id:null, lostamount: {$sum: '$amount'}, lostearn: {$sum: '$earn'}, lostcount:{$sum: 1}}}])
+      { $match: { user: req.session.auth.user, state: 'Kaybetti' } },
+      { $group: { _id: null, lostamount: { $sum: '$amount' }, lostearn: { $sum: '$earn' }, lostcount: { $sum: 1 } } }])
     res.json({ lostinfo: lostinfo[0] })
-  } else if(req.session.auth.role === 'Subadmin'){
+  } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
       const lostinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: req.session.auth.user, state: 'Kaybetti'},{admin: req.session.auth.user, state: 'Kaybetti'}]}},
-        {$group: {_id:null, lostamount: {$sum: '$amount'}, lostearn: {$sum: '$earn'}, lostcount:{$sum: 1}}}])
+        { $match: { $or: [{ user: req.session.auth.user, state: 'Kaybetti' }, { admin: req.session.auth.user, state: 'Kaybetti' }] } },
+        { $group: { _id: null, lostamount: { $sum: '$amount' }, lostearn: { $sum: '$earn' }, lostcount: { $sum: 1 } } }])
       res.json({ lostinfo: lostinfo[0] })
     } else {
       const lostinfo = await Betsummaries.aggregate([
-        {$match: {user: req.body.userbox, state: 'Kaybetti'}},
-        {$group: {_id:null, lostamount: {$sum: '$amount'}, lostearn: {$sum: '$earn'}, lostcount:{$sum: 1}}}])
+        { $match: { user: req.body.userbox, state: 'Kaybetti' } },
+        { $group: { _id: null, lostamount: { $sum: '$amount' }, lostearn: { $sum: '$earn' }, lostcount: { $sum: 1 } } }])
       res.json({ lostinfo: lostinfo[0] })
     }
   } else {
     if (req.body.userbox === 'Üyeler') {
       const lostinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{admin: req.session.auth.user, state: 'Kaybetti'},{superadmin: req.session.auth.user, state: 'Kaybetti'}]}},
-        {$group: {_id:null, lostamount: {$sum: '$amount'}, lostearn: {$sum: '$earn'}, lostcount:{$sum: 1}}}])
+        { $match: { $or: [{ admin: req.session.auth.user, state: 'Kaybetti' }, { superadmin: req.session.auth.user, state: 'Kaybetti' }] } },
+        { $group: { _id: null, lostamount: { $sum: '$amount' }, lostearn: { $sum: '$earn' }, lostcount: { $sum: 1 } } }])
       res.json({ lostinfo: lostinfo[0] })
     } else {
       const lostinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: req.body.userbox, state: 'Kaybetti'},{admin: req.body.userbox, state: 'Kaybetti'}]}},
-        {$group: {_id:null, lostamount: {$sum: '$amount'}, lostearn: {$sum: '$earn'}, lostcount:{$sum: 1}}}])
+        { $match: { $or: [{ user: req.body.userbox, state: 'Kaybetti' }, { admin: req.body.userbox, state: 'Kaybetti' }] } },
+        { $group: { _id: null, lostamount: { $sum: '$amount' }, lostearn: { $sum: '$earn' }, lostcount: { $sum: 1 } } }])
       res.json({ lostinfo: lostinfo[0] })
     }
   }
@@ -1482,50 +1482,50 @@ router.post('/totalinfo', wrapAsync(async (req, res) => {
   const cluser = req.body.userbox
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
     const totalinfo = await Betsummaries.aggregate([
-      {$match: {$or:[{user: seuser, state: 'Aktif'},{user: seuser, state: 'Kazandi'},{user: seuser, state: 'Kaybetti'}]}},
-      {$group: {_id:null, totalamount: {$sum: '$amount'}, totalearn: {$sum: '$earn'}, totalcount:{$sum: 1}}}])
+      { $match: { $or: [{ user: seuser, state: 'Aktif' }, { user: seuser, state: 'Kazandi' }, { user: seuser, state: 'Kaybetti' }] } },
+      { $group: { _id: null, totalamount: { $sum: '$amount' }, totalearn: { $sum: '$earn' }, totalcount: { $sum: 1 } } }])
     res.json({ totalinfo: totalinfo[0] })
-  } else if(req.session.auth.role === 'Subadmin'){
+  } else if (req.session.auth.role === 'Subadmin') {
     if (req.body.userbox === 'Üyeler') {
       const totalinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: seuser, state: 'Aktif'},{user: seuser, state: 'Kazandi'},{user: seuser, state: 'Kaybetti'}, {admin: seuser, state: 'Aktif'},{admin: seuser, state: 'Kazandi'},{admin: seuser, state: 'Kaybetti'}]}},
-        {$group: {_id:null, totalamount: {$sum: '$amount'}, totalearn: {$sum: '$earn'}, totalcount:{$sum: 1}}}])
+        { $match: { $or: [{ user: seuser, state: 'Aktif' }, { user: seuser, state: 'Kazandi' }, { user: seuser, state: 'Kaybetti' }, { admin: seuser, state: 'Aktif' }, { admin: seuser, state: 'Kazandi' }, { admin: seuser, state: 'Kaybetti' }] } },
+        { $group: { _id: null, totalamount: { $sum: '$amount' }, totalearn: { $sum: '$earn' }, totalcount: { $sum: 1 } } }])
       res.json({ totalinfo: totalinfo[0] })
     } else {
       const totalinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: cluser, state: 'Aktif'},{user: cluser, state: 'Kazandi'},{user: cluser, state: 'Kaybetti'}]}},
-        {$group: {_id:null, totalamount: {$sum: '$amount'}, totalearn: {$sum: '$earn'}, totalcount:{$sum: 1}}}])
+        { $match: { $or: [{ user: cluser, state: 'Aktif' }, { user: cluser, state: 'Kazandi' }, { user: cluser, state: 'Kaybetti' }] } },
+        { $group: { _id: null, totalamount: { $sum: '$amount' }, totalearn: { $sum: '$earn' }, totalcount: { $sum: 1 } } }])
       res.json({ totalinfo: totalinfo[0] })
     }
   } else {
     if (req.body.userbox === 'Üyeler') {
       const totalinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{admin: seuser, state: 'Aktif'},{admin: seuser, state: 'Kazandi'},{admin: seuser, state: 'Kaybetti'}, {superadmin: seuser, state: 'Aktif'},{superadmin: seuser, state: 'Kazandi'},{superadmin: seuser, state: 'Kaybetti'}]}},
-        {$group: {_id:null, totalamount: {$sum: '$amount'}, totalearn: {$sum: '$earn'}, totalcount:{$sum: 1}}}])
+        { $match: { $or: [{ admin: seuser, state: 'Aktif' }, { admin: seuser, state: 'Kazandi' }, { admin: seuser, state: 'Kaybetti' }, { superadmin: seuser, state: 'Aktif' }, { superadmin: seuser, state: 'Kazandi' }, { superadmin: seuser, state: 'Kaybetti' }] } },
+        { $group: { _id: null, totalamount: { $sum: '$amount' }, totalearn: { $sum: '$earn' }, totalcount: { $sum: 1 } } }])
       res.json({ totalinfo: totalinfo[0] })
     } else {
       const totalinfo = await Betsummaries.aggregate([
-        {$match: {$or:[{user: cluser, state: 'Aktif'},{user: cluser, state: 'Kazandi'},{user: cluser, state: 'Kaybetti'}, {admin: cluser, state: 'Aktif'},{admin: cluser, state: 'Kazandi'},{admin: cluser, state: 'Kaybetti'}]}},
-        {$group: {_id:null, totalamount: {$sum: '$amount'}, totalearn: {$sum: '$earn'}, totalcount:{$sum: 1}}}])
+        { $match: { $or: [{ user: cluser, state: 'Aktif' }, { user: cluser, state: 'Kazandi' }, { user: cluser, state: 'Kaybetti' }, { admin: cluser, state: 'Aktif' }, { admin: cluser, state: 'Kazandi' }, { admin: cluser, state: 'Kaybetti' }] } },
+        { $group: { _id: null, totalamount: { $sum: '$amount' }, totalearn: { $sum: '$earn' }, totalcount: { $sum: 1 } } }])
       res.json({ totalinfo: totalinfo[0] })
     }
   }
 }))
 router.post('/gamelogs', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
-    const gamelog = await Gamelogs.find({user: req.session.auth.user}).sort({_id: -1}).limit(50)
+    const gamelog = await Gamelogs.find({ user: req.session.auth.user }).sort({ _id: -1 }).limit(50)
     res.json({ gamelog: gamelog })
   } else {
-    const gamelog = await Gamelogs.find({user: req.body.userbox}).sort({_id: -1}).limit(50)
+    const gamelog = await Gamelogs.find({ user: req.body.userbox }).sort({ _id: -1 }).limit(50)
     res.json({ gamelog: gamelog })
   }
 }))
 router.post('/gamelog/datefilter', wrapAsync(async (req, res) => {
   if (req.session.auth.role === 'Member' || req.session.auth.role === 'Submember') {
-    const datefilter = await Gamelogs.find({user: req.session.auth.user, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+    const datefilter = await Gamelogs.find({ user: req.session.auth.user, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
     res.json({ datefilter: datefilter })
-  } else{
-    const datefilter = await Gamelogs.find({user: req.body.userbox, date:{$gte: req.body.datestart, $lte: req.body.datefinish}}).sort({_id: -1})
+  } else {
+    const datefilter = await Gamelogs.find({ user: req.body.userbox, date: { $gte: req.body.datestart, $lte: req.body.datefinish } }).sort({ _id: -1 })
     res.json({ datefilter: datefilter })
   }
 }))

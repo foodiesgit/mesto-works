@@ -10,10 +10,10 @@ const Settimes = require('../schemas/settimesSC')
 let ipAddr = ''
 let role = ''
 
-router.post('/login', wrapAsync(async (req, res) => {     
+router.post('/login', wrapAsync(async (req, res) => {
   let loginuser = req.body.user
   if (loginuser) {
-    const result = await Users.findOne({user: loginuser})
+    const result = await Users.findOne({ user: loginuser })
     if (result) {
       if (req.body.pass === String(cryptr.decrypt(result.pass))) {
         if (result.state === 'pasif') {
@@ -25,40 +25,40 @@ router.post('/login', wrapAsync(async (req, res) => {
         } else {
           if (result.role === 'Member' || result.role === 'Subadmin') {
             role = result.admin
-          } else if(result.role === 'Submember'){
+          } else if (result.role === 'Submember') {
             role = result.superadmin
           } else {
             role = result.user
           }
-          if (result.role === 'Subadmin' || result.role === 'Member'|| result.role === 'Submember'){
-            const settime = await Settimes.findOne({user: role}, 'sk sa')
+          if (result.role === 'Subadmin' || result.role === 'Member' || result.role === 'Submember') {
+            const settime = await Settimes.findOne({ user: role }, 'sk sa')
             const time = moment().format('HH:mm')
             if (time > settime.sk && time < settime.sa) {
-              res.json({message: 'Giriş Kapalı'})
-            }else{
+              res.json({ message: 'Giriş Kapalı' })
+            } else {
               insertLogin(result)
             }
-          }else{
+          } else {
             insertLogin(result)
           }
         }
-        }else{
-          checkLogincount(result)
-        }
-    }else{
+      } else {
+        checkLogincount(result)
+      }
+    } else {
       res.json({ message: 'Geçersiz üye' })
     }
-    async function checkLogincount(value){
+    async function checkLogincount(value) {
       if (value.fakelogin < value.logincount) {
-        await Users.updateOne({user: loginuser}, {$inc: {fakelogin: + 1}})
+        await Users.updateOne({ user: loginuser }, { $inc: { fakelogin: + 1 } })
         res.json({ message: 'Geçersiz üye' })
       } else {
         res.json({ message: 'Hatalı giriş sınırı!' })
       }
     }
-    async function insertLogin  (value) {
+    async function insertLogin(value) {
       const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress ||
-      (req.connection.socket ? req.connection.socket.remoteAddress : null)
+        (req.connection.socket ? req.connection.socket.remoteAddress : null)
       ipAddr = ip
       let loginlogs = new Loginlogs({
         user: value.user,
@@ -68,12 +68,12 @@ router.post('/login', wrapAsync(async (req, res) => {
         proccess: 'Online',
         ip: ipAddr
       })
-      await Users.updateOne({user: loginuser},{logincheck: 'active', $inc: {sessioncount: + 1}})
+      await Users.updateOne({ user: loginuser }, { logincheck: 'active', $inc: { sessioncount: + 1 } })
       await loginlogs.save()
       req.session.auth = value
-      res.json({ code: 200, message: 'Giriş Başarılı', auth: value})
+      res.json({ code: 200, message: 'Giriş Başarılı', auth: value })
     }
-  } 
+  }
 }))
 router.get('/logout', wrapAsync(async (req, res) => {
   let loginlogs = new Loginlogs({
@@ -84,26 +84,26 @@ router.get('/logout', wrapAsync(async (req, res) => {
     proccess: 'Offline',
     ip: ipAddr
   })
-  await Users.updateOne({user: req.session.auth.user},{$inc: {sessioncount: - 1}})
-  const result = await Users.findOne({user: req.session.auth.user}, 'sessioncount')
+  await Users.updateOne({ user: req.session.auth.user }, { $inc: { sessioncount: - 1 } })
+  const result = await Users.findOne({ user: req.session.auth.user }, 'sessioncount')
   if (result.sessioncount === 0) {
-    await Users.updateOne({user: req.session.auth.user},{logincheck:'passive'})
+    await Users.updateOne({ user: req.session.auth.user }, { logincheck: 'passive' })
     await loginlogs.save()
     delete req.session.auth
     res.json({ ok: true })
-  }else{
+  } else {
     await loginlogs.save()
     delete req.session.auth
     res.json({ ok: true })
   }
 }))
 router.put('/resetpass', wrapAsync(async (req, res) => {
-  const result = await Users.findOne({user: req.body.user}, 'user nick')
+  const result = await Users.findOne({ user: req.body.user }, 'user nick')
   if (result) {
     let newPass = cryptr.encrypt(req.body.pass)
     if (req.body.nick === result.nick) {
-      await Users.updateOne({user: req.body.user},{pass: newPass, logincheck: 'passive', fakelogin: 0, sessioncount: 0})
-      res.json({code:200, message: 'Sıfırlama başarılı' } )
+      await Users.updateOne({ user: req.body.user }, { pass: newPass, logincheck: 'passive', fakelogin: 0, sessioncount: 0 })
+      res.json({ code: 200, message: 'Sıfırlama başarılı' })
     } else {
       return res.json({ message: 'Gecersiz nick' })
     }
@@ -111,9 +111,9 @@ router.put('/resetpass', wrapAsync(async (req, res) => {
     return res.json({ message: 'Gecersiz kullanici' })
   }
 }))
-router.post('/multilogin', wrapAsync(async (req, res)=>{
-  await Users.updateOne({user: req.session.auth.user},{multilogin: req.body.multilogin})
-  res.json({ code: 200} )
+router.post('/multilogin', wrapAsync(async (req, res) => {
+  await Users.updateOne({ user: req.session.auth.user }, { multilogin: req.body.multilogin })
+  res.json({ code: 200 })
 }))
 
 module.exports = router
