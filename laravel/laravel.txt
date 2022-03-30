@@ -67,5 +67,5 @@ $rules = Validator::make($req->all(),$validationRules,[
     'min'=>'Name must be:min charecters!'
 ]);
 
-
+php artisan vendor:publish --tag=laravel-errors
 
