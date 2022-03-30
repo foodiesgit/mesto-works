@@ -23,32 +23,45 @@ const findSoccer = (req, res, id) => {
 const createSoccer = (req, res) => {
   try {
     const newSoccer = {
-      id: 84599045,
-      sport_id: 1,
-      time: 1575628200,
-      time_status: 0,
-      league: {
-        id: 10036547,
-        name: "ahmet Kaya"
-      },
-      home: {
-        id: 10431907,
-        name: "Mustafa"
-      },
-      away: {
-        id: 10359159,
-        name: "Alcorcon B"
-      },
-      ss: null,
-      our_event_id: 1808139,
-      updated_at: 1575582111
+        success: 1,
+        pager: {
+            page: 10,
+            per_page: 50,
+            total: 924
+        },
+        results: [
+            {
+                id: "84594890",
+                sport_id: 1,
+                time: 1575588600,
+                time_status: 0,
+                league: {
+                    id: 10037445,
+                    name: "Filiz Kaya"
+                },
+                home: {
+                    id: 10360110,
+                    name: "Mesto"
+                },
+                away: {
+                    id: 10360103,
+                    name: "Cerro Largo"
+                },
+                ss: null,
+                our_event_id: 2085945,
+                updated_at: 1575582017
+            }
+        ]
     }
-    const final = soccer[0].results.push(newSoccer)
-    fs.appendFile('./soccer.json', JSON.stringify(final), 'utf8',(err) => {
-      if (!err) {
-        console.log('Done...')
-      }
-    })
+    fs.readFile('./soccer.json', function (err, data) {
+      var final = JSON.parse(data)
+      final.push(newSoccer)
+      fs.writeFile("./soccer.json", JSON.stringify(final), 'utf-8', (err) => {
+        if (!err) {
+          console.log('Done')
+        }
+      })
+  })
     res.writeHead(200, { 'content-type': 'application/json' })
     return res.end(JSON.stringify(newSoccer))
   } catch (error) {
