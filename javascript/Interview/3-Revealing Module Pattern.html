@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    //Revealing Module Pattern
+    //Turn this object literal into a module that only exposes the render method
+
+    // let myModule = {
+    //   data:['Javascript','Nodejs','Mongodb'],
+    //   render: () => {
+    //     console.log('Render Method.')
+    //   },
+    //   add: () => {
+    //     console.log('Add Method.')
+    //   },
+    //   remove: () => {
+    //     console.log('Remove Method.')
+    //   }
+    // }
+    // console.log(myModule.data)
+    // myModule.render()
+    // myModule.add()
+    // myModule.remove()
+
+    //the solution
+
+    let myModule = (function(){
+      let data = ['Javascript','Nodejs','Mongodb']
+      let render = () => {
+        console.log(data)
+      }
+      let add = () => {
+        data.push('Python')
+      }
+      let remove = () => {
+        data.pop()
+      }
+      return {render:render}
+    })()
+    //you can reach only the render method
+    myModule.render()
+    myModule.add()
+  </script>
+</body>
+</html>

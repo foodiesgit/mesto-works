@@ -43,7 +43,8 @@ const createSoccer = (req, res) => {
       our_event_id: 1808139,
       updated_at: 1575582111
     }
-    fs.appendFile('./soccer.json', JSON.stringify(newSoccer), 'utf8',(err) => {
+    const final = soccer[0].results.push(newSoccer)
+    fs.appendFile('./soccer.json', JSON.stringify(final), 'utf8',(err) => {
       if (!err) {
         console.log('Done...')
       }
