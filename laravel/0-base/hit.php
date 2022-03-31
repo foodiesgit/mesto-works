@@ -7,6 +7,6 @@ Route::get('/', function () {
 });
 
 Route::get('/users', function () {
-//    $users = DB::table('users')->increment('viewer', 1);//increment whole table
+//    $users = DB::table('users')->increment('hit', 1);//increment whole table
     DB::table('users')->whereId(1)->increment('hit', 1);//increment as name
 });
