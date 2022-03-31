@@ -23,17 +23,20 @@ class Questions extends Model
 
     protected $appends = ['truePercent'];
 
-    public function getTruePercentAttribute(){
+    public function getTruePercentAttribute()
+    {
         $answersCount = $this->answers()->count();
         $answersTrue = $this->answers()->where('answers', $this->correct_answer)->count();
-        return (100/$answersCount) * $answersTrue;
+        return (100 / $answersCount) * $answersTrue;
     }
-    
-    public function answers(){
+
+    public function answers()
+    {
         return $this->hasMany(Answers::class, 'question_id');
     }
 
-    public function userAnswers(){
+    public function userAnswers()
+    {
         return $this->hasOne(Answers::class, 'question_id')->where('user_id', auth()->user()->id);
     }
 }
