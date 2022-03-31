@@ -11,12 +11,16 @@
   <script>
     let num = 0
     const Increment = async () => {
+      console.log('Starting: ' + num)
       num+=  await 2
-      console.log(num)
+      console.log('Async Function Blog: ' + num)
     }
     Increment()
+    for (let i = 0; i < 10000; i++) {
+      console.log(i)
+    }
     num+=1
-    console.log(num)
+    console.log('Outside Async Function Blog: ' + num)
 
     //guess result
   </script>
