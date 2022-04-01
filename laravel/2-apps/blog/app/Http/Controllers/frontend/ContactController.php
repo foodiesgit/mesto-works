@@ -4,7 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\RequestContact;
 use function PHPUnit\Framework\returnSelf;
 
 class ContactController extends Controller
@@ -14,7 +14,7 @@ class ContactController extends Controller
         return view('frontend.pages.contact');
     }
 
-    public function SendMessage(Request $request)
+    public function SendMessage(RequestContact $request)
     {
        return $request->post();
     }
