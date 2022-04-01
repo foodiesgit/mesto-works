@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 if(document.getElementById('send-message')){
     document.getElementById('send-message').addEventListener('click', (e) => {
-        let test = false
+        let test = true
         if(!test){
             e.preventDefault()
             alert('Hello')
