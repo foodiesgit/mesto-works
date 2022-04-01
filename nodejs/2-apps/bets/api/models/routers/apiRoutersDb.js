@@ -53,7 +53,7 @@ router.get('/markets/:id', wrapAsync(async (req, res) => {
 }))
 router.put('/updatemarkets', wrapAsync(async (req, res) => {
   switch (req.body.table) {
-    case 'soccermarkets':
+      case 'soccermarkets':
       await Soccermarkets.updateOne({ mid: req.body.mid }, { $set: { [req.session.auth.user]: req.body.state } })
       break
     case 'basketmarkets':
