@@ -11,10 +11,10 @@
 <body>
 
   <script>
-    const regex = /(\d{3}[ -]?)(\d{3}[ -]?)(\d{4})/;//can checl all formats  on below
-    // const str = `1234567890`;
-    // const str = `123 456 7890`;
-    const str = `123-456-7890`;
+    const regex = /(^[1-9]{3}[ -]?)(\d{3}[ -]?)(\d{4})$/;//can checl all formats  on below
+    // const str = `5324567890`;
+    // const str = `532 456 7890`;
+    const str = `532-456-7890`;
 
     console.log(regex.exec(str))
     console.log(regex.exec(str)[0])
