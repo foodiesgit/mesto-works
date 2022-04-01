@@ -14,7 +14,9 @@ class RequestContact extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/(^[^ ])/u'
+            'name' => 'required|regex:/(^\w)/u',
+            'email' => 'required|regex:/([^ ]+)@([^ ]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/u',
+            'phone' => 'required|regex:/(^[1-9]{3}[ -]?)(\d{3}[ -]?)(\d{4})$/u'
         ];
     }
 }
