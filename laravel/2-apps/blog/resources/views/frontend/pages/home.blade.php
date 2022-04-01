@@ -13,7 +13,7 @@
                         <a href="{{ route('category.filter', $item->id) }}"
                             class="list-group-item list-group-item-action d-flex justify-content-between @if (Request::segment(1) == $item->id) active @endif">
                             <span>{{ $item->name }}</span>
-                            <span class="badge bg-success">{{ $item->articleCount() }}</span>
+                            <span class="badge bg-danger">{{ $item->articleCount() }}</span>
                         </a>
                     @endforeach
                 @endisset

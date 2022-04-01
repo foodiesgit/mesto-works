@@ -9,6 +9,9 @@
                         <div class="alert alert-danger m-1" role="alert">{{ $error }}</div>
                     @endforeach
                 @endif
+                @if (session('success'))
+                    <div class="alert alert-success m-1" role="alert">{{ session('success') }}</div>
+                @endif
                 <div class="my-5">
                     <form id="contactForm" action="{{ route('contact.send.message') }}" method="POST">
                         @csrf

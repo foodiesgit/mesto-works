@@ -23,10 +23,12 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
-document.getElementById('send-message').addEventListener('click', (e) => {
-    let test = true
-    if(!test){
-        e.preventDefault()
-        alert('Hello')
-    }
-})
+if(document.getElementById('send-message')){
+    document.getElementById('send-message').addEventListener('click', (e) => {
+        let test = false
+        if(!test){
+            e.preventDefault()
+            alert('Hello')
+        }
+    })
+}
