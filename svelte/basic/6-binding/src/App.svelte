@@ -1,9 +1,11 @@
 <script>
 	export let name;
+	import Binding from "./Binding.svelte";
 </script>
 
 <main>
 	<h2>{name}</h2>
+	<Binding />
 </main>
 
 <style>
