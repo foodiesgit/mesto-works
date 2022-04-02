@@ -36,7 +36,7 @@
   </section>
   <audio id="audio" src="./gun-gunshot-01.wav" autostart></audio>
   <script>
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       let audio = document.getElementById('audio')
       audio.play()
       let bullet = document.createElement('span')
