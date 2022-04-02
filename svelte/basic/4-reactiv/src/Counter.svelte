@@ -3,10 +3,10 @@
   $: reactivState = count * 2; //listen to count
 
   const Increment = () => {
-    count < 10 ? count += 1 : null;
+    count < 10 ? count += 1 : alert('Finished');
   };
   const Decrement = () => {
-    count > 0 ? count -= 1 : null;
+    count > 0 ? count -= 1 : alert('Finished');
   };
 </script>
 <p>Count Value</p>
