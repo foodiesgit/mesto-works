@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <button @click="counter++">Inrease</button>
+    <button @click="counter--">Decrease</button>
+    <span  style="font-size: 20;margin-left: 10px;">{{counter}}</span>
+    <h3 style="margin-left: 10px; color:green;">{{result}}</h3>
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Computed',
+        counter:0
+      },
+      watch: {
+        counter(){//must be same name with counter
+          let vm = this
+          setTimeout(() => {
+            vm.counter = 0
+          }, 2000)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

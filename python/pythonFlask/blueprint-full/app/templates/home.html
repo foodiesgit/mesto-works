@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block body_content %}
+
+  <h1>Home</h1>
+  <p>{{session.name}}</p>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}
+        <span class="alert alert-success">{{msg}}</span>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+{% endblock %}

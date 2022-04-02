@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_58564c1daa1f4f6ba09cff84e419157f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_58564c1daa1f4f6ba09cff84e419157f" ></div>
+        
+</body>
+<script>    
+    
+            var map_58564c1daa1f4f6ba09cff84e419157f = L.map(
+                "map_58564c1daa1f4f6ba09cff84e419157f",
+                {
+                    center: [37.065842, 37.37608],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 15,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9a92e3ea595a41549b46d8f0f75a881d = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_58564c1daa1f4f6ba09cff84e419157f);
+        
+    
+            var marker_7fcd2e765468466e9ecea8470be9278b = L.marker(
+                [37.066247, 37.373276],
+                {}
+            ).addTo(map_58564c1daa1f4f6ba09cff84e419157f);
+        
+    
+            var icon_6455b52b81aa47bebf6c0d0d8c23e2c3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_7fcd2e765468466e9ecea8470be9278b.setIcon(icon_6455b52b81aa47bebf6c0d0d8c23e2c3);
+        
+    
+        var popup_18bb98d43fc743258bf2bc9050b7ff75 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_00940c1192234d68b61145821c0e7137 = $(`<div id="html_00940c1192234d68b61145821c0e7137" style="width: 100.0%; height: 100.0%;">Detaylar</div>`)[0];
+            popup_18bb98d43fc743258bf2bc9050b7ff75.setContent(html_00940c1192234d68b61145821c0e7137);
+        
+
+        marker_7fcd2e765468466e9ecea8470be9278b.bindPopup(popup_18bb98d43fc743258bf2bc9050b7ff75)
+        ;
+
+        
+    
+    
+            marker_7fcd2e765468466e9ecea8470be9278b.bindTooltip(
+                `<div>
+                     Gaziantep Buyuk Sehir Belediyesi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_611d006de4ea4307a1fd915d6c69fe85 = L.marker(
+                [37.057617, 37.379658],
+                {}
+            ).addTo(map_58564c1daa1f4f6ba09cff84e419157f);
+        
+    
+            var icon_8eea0139089b4357b88fc5d0563d3f5c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_611d006de4ea4307a1fd915d6c69fe85.setIcon(icon_8eea0139089b4357b88fc5d0563d3f5c);
+        
+    
+        var popup_f72bafd438714e7f884cd6287c826fb6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c80501501b8b428eb2ce1d2a7ea36c0a = $(`<div id="html_c80501501b8b428eb2ce1d2a7ea36c0a" style="width: 100.0%; height: 100.0%;">Detaylar</div>`)[0];
+            popup_f72bafd438714e7f884cd6287c826fb6.setContent(html_c80501501b8b428eb2ce1d2a7ea36c0a);
+        
+
+        marker_611d006de4ea4307a1fd915d6c69fe85.bindPopup(popup_f72bafd438714e7f884cd6287c826fb6)
+        ;
+
+        
+    
+    
+            marker_611d006de4ea4307a1fd915d6c69fe85.bindTooltip(
+                `<div>
+                     Gaziantep Sahinbey Belediyesi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_15413b5673ea4ec784eb840abfa81f19 = L.marker(
+                [37.072505, 37.395385],
+                {}
+            ).addTo(map_58564c1daa1f4f6ba09cff84e419157f);
+        
+    
+            var icon_7ce3207b05614094acfbc9e4935a487b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_15413b5673ea4ec784eb840abfa81f19.setIcon(icon_7ce3207b05614094acfbc9e4935a487b);
+        
+    
+        var popup_95a80ca9f9824f478d24ddf91dbeba50 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ca9215f9d0b04bbcbe44356f326faa58 = $(`<div id="html_ca9215f9d0b04bbcbe44356f326faa58" style="width: 100.0%; height: 100.0%;">Detaylar</div>`)[0];
+            popup_95a80ca9f9824f478d24ddf91dbeba50.setContent(html_ca9215f9d0b04bbcbe44356f326faa58);
+        
+
+        marker_15413b5673ea4ec784eb840abfa81f19.bindPopup(popup_95a80ca9f9824f478d24ddf91dbeba50)
+        ;
+
+        
+    
+    
+            marker_15413b5673ea4ec784eb840abfa81f19.bindTooltip(
+                `<div>
+                     Gaziantep Sehitkamil Belediyesi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>

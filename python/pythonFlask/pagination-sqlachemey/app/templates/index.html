@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block body_content%}
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <th>Name</th>
+      <th>Password</th>
+      <th>Proccess</th>
+    </thead>
+    <tbody>
+      {% for item in users.items %}
+        <tr>
+          <th>{{item.name}}</th>
+          <th>{{item.password}}</th>
+          <th style="width: 250px;">
+            <a href="detail/{{item.id}}" class="btn btn-primary" style="width: 250px;">Detail</a>
+          </th>
+        </tr>
+      {% endfor %}
+    </tbody>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% for page_num in users.iter_pages() %}
+          {% if page_num %}
+            <li class="page-item"><a href="{{ url_for('index', page=page_num) }}" class="page-link">{{ page_num }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </table>
+
+{% endblock %}

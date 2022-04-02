@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .form{
+      display: flex;
+    }
+    ul{
+      width: 260px;
+      margin: 0;
+      padding: 5px;
+    }
+    ul > li{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 28px;
+      margin: 5px 0;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    ul > li > span{
+      width: 90px;
+    }
+    .ui{
+      display: block;
+      width: 200px;
+    }
+    ul > li > input{
+      padding-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <form class="form">
+      <ul>
+        <li><h2>User Form</h2></li>
+        <li>
+          <span>Name:</span>
+          <input type="text" v-model="users.name">
+        </li>
+        <li>
+          <span>Lastname:</span>
+          <input type="text" v-model.lazy="users.lastname" placeholder="Lazy">
+        </li>
+        <li>
+          <span>Age:</span>
+          <input type="number" v-model.number="users.age" placeholder="Number">
+        </li>
+        <li>
+          <span>Gender:</span>
+          Male: <input type="radio" name="gender" v-model="users.gender" value="Male">
+          Female: <input type="radio" name="gender" v-model="users.gender" value="Female">
+        </li>
+        <li>
+          <span>Lang:</span>
+          En: <input type="checkbox" v-model="users.lang" value="Engish">
+          Ger: <input type="checkbox" v-model="users.lang" value="German">
+          Fr: <input type="checkbox" v-model="users.lang" value="Franch">
+        </li>
+        <li>
+          <span>Country:</span>
+          <select v-model="users.selectedCountry">
+            <option v-for="(list,index) in users.country" :key="index">{{list}}</option>
+          </select>
+        </li>
+        <li>
+          <button @click.prevent="submitForm()">Submit</button>
+        </li>
+      </ul>
+      <ul v-if="isSubmit">
+        <li><h2>User Info</h2></li>
+        <li>
+          <span>Name:</span>
+          <span class="ui">{{users.name}}</span>
+        </li>
+        <li>
+          <span>Lastname:</span>
+          <span class="ui">{{users.lastname}}</span>
+        </li>
+        <li>
+          <span>Age:</span>
+          <span class="ui">{{users.age}}</span>
+        </li>
+        <li>
+          <span>Gender:</span>
+          <span class="ui">{{users.gender}}</span>
+        </li>
+        <li style="display: flex;flex-direction: column; align-items: flex-start; width:200px;height: auto;">
+          <span>Lang:</span>
+          <span v-for="(list,index) in users.lang" :key="index">{{list}}</span>
+        </li>
+        <li>
+          <span>Country:</span>
+          <span class="ui">{{users.selectedCountry}}</span>
+        </li>
+      </ul>
+    </form>
+
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Form',
+        users:{
+          name:null,
+          lastname:null,
+          age:null,
+          gender:null,
+          lang:[],
+          country:['England','Germany','Franch'],
+          selectedCountry:'England'
+        },
+        isSubmit:false
+      },
+      methods:{
+        submitForm(){
+          this.isSubmit = true
+        }
+      }
+    })
+  </script>
+</body>
+</html>

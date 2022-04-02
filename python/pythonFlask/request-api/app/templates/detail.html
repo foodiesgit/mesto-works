@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block body_content%}
+
+  <table class="table table-striped">
+    <h2>{{name}}</h2>
+    <thead class="table-dark">
+      <th>Street</th>
+      <th>Zpicode</th>
+      <th>Phone</th>
+      <th>Website</th>
+      <th>Company</th>
+    </thead>
+    <tbody>
+      <tr>
+        <th>{{users.address.street}}</th>
+        <th>{{users.address.zipcode}}</th>
+        <th>{{users.phone}}</th>
+        <th>{{users.website}}</th>
+        <th style="width: 280px;">
+          {{users.company.name}}
+        </th>
+      </tr> 
+  </table>
+
+{% endblock %}
