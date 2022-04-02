@@ -9,6 +9,7 @@
   };
   const loadImg = (e) => {
     img2 = URL.createObjectURL(e.target.files[0]);
+    
   };
 </script>
 
