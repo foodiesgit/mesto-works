@@ -7,7 +7,7 @@
 	<!-- static content -->
 	<h2>{title}</h2>
 	<!-- dynamic content -->
- <img src={img} alt="Not Found!" />
+ <img src={img} alt="Not Found!">
 </main>
 
 <style>
