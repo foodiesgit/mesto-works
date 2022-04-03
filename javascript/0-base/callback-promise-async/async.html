@@ -15,7 +15,9 @@
         let res = await fetch('../soccer.json')
         let data = await res.json()
         data[0].results.forEach(item => {
-          console.log(item.home.name)
+          if(item.id === '84574997'){
+            console.log(item.home.name)
+          }
         })
       } catch (error) {
         console.log(error)
