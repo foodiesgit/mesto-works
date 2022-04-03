@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount } from "../../../nodejs/vv/node_modules/svelte/types/runtime";
   let final = [];
   onMount(async () => {
     const result = await fetch("https://jsonplaceholder.typicode.com/users");
