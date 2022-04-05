@@ -11,7 +11,11 @@
   <button id="get">Get LocalStorage</button>
   <button id="del">Delete LocalStorage</button>
   <button id="delAll">Delete All LocalStorage</button>
-<!-- script side----------------------------- -->
+
+
+  <button id="setJson">Set LocalStorage With Json Data</button>
+  <button id="getJson">Get LocalStorage With Json Data</button>
+  <!-- script side----------------------------- -->
   <script>
     document.getElementById('set').addEventListener('click',()=>{
       localStorage.setItem('auth','mesto')
@@ -24,6 +28,19 @@
     })
     document.getElementById('delAll').addEventListener('click',()=>{
       localStorage.clear()
+    })
+
+    //json data
+    let users = [
+      {name:'Mesto',salery:3000},
+      {name:'Deniz',salery:4000},
+      {name:'Faruk',salery:5000}
+    ]
+    document.getElementById('setJson').addEventListener('click',()=>{
+      localStorage.setItem('users', JSON.stringify(users))
+    })
+    document.getElementById('getJson').addEventListener('click',()=>{
+      console.log(JSON.parse(localStorage.getItem('users')))
     })
   </script>
 </body>
