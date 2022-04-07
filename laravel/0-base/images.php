@@ -1,6 +1,6 @@
 <?php
 //for photo path run------------------------------
-php artisan storage:link then change .env API = http://127.0.0.1:8000
+//php artisan storage:link then change .env API = http://127.0.0.1:8000
 
 //with new name--------------------------
 $fileName = session()->get( 'email' ).'.'.$req->file->getClientOriginalExtension();
@@ -22,9 +22,9 @@ $folderName = $req->folderName;
 Storage::disk('public')->put('magazine/'.$folderName.'/'.$req->fileName.'.png', base64_decode($image));
 
 //change this code with public code in config/filesystem file to use publci folder
-'public' => [
-    'driver' => 'local',
-    'root'   => public_path() . '/upload',
-    'url' => env('APP_URL').'/public',
-    'visibility' => 'public',
-],
+// 'public' => [
+//     'driver' => 'local',
+//     'root'   => public_path() . '/upload',
+//     'url' => env('APP_URL').'/public',
+//     'visibility' => 'public',
+// ]
