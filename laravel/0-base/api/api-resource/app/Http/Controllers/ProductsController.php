@@ -49,7 +49,7 @@ class ProductsController extends Controller
         if(is_null($updateProduct)){
            return response()->json(['message' => 'Data not found!'],200);
         }
-        return $updateProducts->update($request->all());
+        return $updateProduct->update($request->all());
     }
 
     public function destroy($id)
