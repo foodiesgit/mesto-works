@@ -9,3 +9,10 @@ fs.appendFile('./users.json', JSON.stringify(users),(err) => {
     console.log('Done...')
   }
 })
+
+//or
+// fs.writeFile('./users.json', JSON.stringify(users),(err) => {
+//   if (!err) {
+//     console.log('Done...')
+//   }
+// })
