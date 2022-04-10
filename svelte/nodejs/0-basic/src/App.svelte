@@ -5,12 +5,17 @@
 	import Home from './routes/Home.svelte'
 	import Users from './routes/Users.svelte'
 	import Contact from './routes/Contact.svelte'
+	import Edit from './routes/Edit.svelte'
+	import Details from './routes/Details.svelte'
+	import Add from './routes/Add.svelte'
 	import Error from './routes/Error.svelte'
 
   let routes = {
     "/": Home,
     "/users": Users,
-    "/users/:id": Users,
+    "/users/details/:id": Details,
+    "/users/edit/:id": Edit,
+    "/users/add": Add,
     "/contact": Contact,
     "*": Error,
   };
