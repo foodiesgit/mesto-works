@@ -7,7 +7,8 @@ const messagesSchema = new mongoose.Schema({
   userName:{type: String, required: true},
   text:{type: String, required: true}
 })
-const UsersSchema = new mongoose.Schema({
+
+const TestSchema = new mongoose.Schema({
   name: {type: String, required: [true, 'Name required!'], unique:true},
   password: {type: String, required: [true,'Password required!'],minlength:[4,'Password must be less 4 charecters!']},
   salery: {type: Number, required: [true,'Salery required!'],minlength:[4,'Salery must be less 4 charecters!']},
@@ -16,11 +17,7 @@ const UsersSchema = new mongoose.Schema({
   messagesCount: {type: Number},
   scores:[Number],
   children:[Array],
-  meta:{
-    votes:Number,
-    favs:number
-  },
   created_at: {type: Date, default: Date.now()}
 })
 
-module.exports = new mongoose.model('Users', UsersSchema)
+module.exports = new mongoose.model('Test', TestSchema)
