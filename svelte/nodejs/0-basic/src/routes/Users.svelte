@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   let final = [];
   onMount(async () => {
-    const result = await fetch("/api");
+    const result = await fetch("/api/users");
     final = await result.json();
   });
 </script>
@@ -38,9 +38,9 @@
           <td class="col-4">{email}</td>
           <td class="col-2">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <button type="button" class="btn btn-danger btn-block">Left</button>
-              <button type="button" class="btn btn-warning">Middle</button>
-              <button type="button" class="btn btn-success">Right</button>
+              <a href="#/users/details/2" class="btn btn-primary text-light">Details</a>
+              <a href="#/users/edit/2" class="btn btn-warning">Edit</a>
+              <button type="button" class="btn btn-danger btn-block">Delete</button>
             </div>
           </td>
         </tr>

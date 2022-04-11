@@ -1,6 +1,5 @@
 const fs = require("fs");
 const rs = fs.createReadStream("./video.mp4");
-const ws = fs.createWriteStream("./new.mp4");
 
 fs.stat("./video.mp4", (err, data) => {
   const total = data.size;
@@ -12,8 +11,8 @@ fs.stat("./video.mp4", (err, data) => {
     console.log(Math.round((100 * prograss) / total) + "%");
   });
 
-  rs.pipe(ws);
-  ws.on("finish", () => {
-    console.log("New video created!");
+  rs.on("end", () => {
+    console.log("Done...");
+    console.log("Size..." + (total / 1024 / 1024).toFixed(2));
   });
 });

@@ -1,19 +1,19 @@
 const express = require('express')
 const app = express()
-const morgan  = require('morgan')
 const fs = require('fs')
 
-app.use(morgan('combined'))
+app.use(express.json())
 
 app.get('/', (req, res, next) => {
   console.log(req)
-  let logger =  req.url +' '+ req.method +'\n'
+  let d = new Date()
+  let logger =  req.url +'\n'+ req.method +'\n'+ d.toLocaleDateString() + '\n'
   fs.appendFile('./logger.txt', logger,(err) => {
     if (!err) {
       console.log('Done...')
     }
   })
-  res.send(req)
+  res.send({result: JSON.stringify(req.url)})
 })
 
 

@@ -2,11 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 fs.mkdir(path.resolve(__dirname, './newfolder2'), { recursive: true }, e => {
-    if (e) {
-        console.error(e);
-    } else {
-        console.log('Success');
-    }
+    e ? console.error(e) : console.log('Success')
  })
 
 // const createDirectories = (pathname) => {
