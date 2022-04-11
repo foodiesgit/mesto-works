@@ -5,6 +5,9 @@
     const result = await fetch("https://jsonplaceholder.typicode.com/users");
     final = await result.json();
   });
+  const inlineEvent = (param) => {
+    console.log(param)
+  }
 </script>
 
 <table class="table table-bordered">
@@ -32,7 +35,8 @@
     {#if final}
       {#each final as {name,username,email,id} (id)}
         <tr>
-          <td>{name}</td>
+          <td on:click={inlineEvent(name)}>{name}</td>
+          <!-- <td on:click={() => inlineEvent(name)}>{name}</td> -->
           <td>{username}</td>
           <td>{email}</td>
         </tr>
