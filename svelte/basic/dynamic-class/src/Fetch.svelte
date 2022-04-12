@@ -5,6 +5,10 @@
     const result = await fetch("https://jsonplaceholder.typicode.com/users");
     final = await result.json();
   });
+  const inlineEvent = (param) => {
+    console.log(param)
+  }
+  let isGreen = true
 </script>
 
 <table class="table table-bordered">
@@ -32,9 +36,10 @@
     {#if final}
       {#each final as {name,username,email,id} (id)}
         <tr>
-          <td>{name}</td>
-          <td>{username}</td>
-          <td>{email}</td>
+          <td on:click={inlineEvent(name)}>{name}</td>
+          <!-- <td on:click={() => inlineEvent(name)}>{name}</td> -->
+          <td class:red={username === 'Bret'}>{username}</td>
+          <td class:green={isGreen}>{email}</td>
         </tr>
       {/each}
     {:else}
@@ -44,4 +49,10 @@
 </table>
 
 <style>
+  .red{
+    color: red;
+  }
+  .green{
+    color: green;
+  }
 </style>
