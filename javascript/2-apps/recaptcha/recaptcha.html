@@ -41,13 +41,15 @@
       width: 315px;
     }
 
-    .captcha-con-left{
+    .captcha-con-left {
       width: 80%;
       margin-right: 10px;
     }
-    .captcha-con-right{
+
+    .captcha-con-right {
       width: 20%;
     }
+
     #captcha {
       display: flex;
       width: 100%;
@@ -69,11 +71,13 @@
       position: relative;
       color: #fff;
     }
-    #refresh-btn{
+
+    #refresh-btn {
       height: 50px;
       cursor: pointer;
     }
-    #refresh-btn:hover{
+
+    #refresh-btn:hover {
       transform: scale(1.1);
     }
   </style>
@@ -82,7 +86,7 @@
 <body>
   <div id="main">
     <h1>Recapctha</h1>
-    <form  method="post">
+    <form method="post">
       <input type="text" class="input" name="" id="" placeholder="Name">
       <input type="text" class="input" name="" id="" placeholder="Password">
       <input type="submit" class="input" name="" id="submit" value="Login">
@@ -100,7 +104,7 @@
 
   <script>
     $ = (param) => document.querySelector(param)
-  let key = ''
+    let key = ''
     const setCaptcha = () => {
       key = (Math.random() + 1).toString(36).substring(8)
       let splitValue = key.split('')
@@ -119,11 +123,11 @@
     }
     $('#submit').addEventListener('click', (e) => {
       let recapctha_input = $('#recapctha_input').value
-      if(key != recapctha_input){
-         e.preventDefault()
-         alert('Not match!')
-         $('#captcha').innerText = ''
-         setCaptcha()
+      if (key != recapctha_input) {
+        e.preventDefault()
+        alert('Not match!')
+        $('#captcha').innerText = ''
+        setCaptcha()
       } else {
         return true
       }
