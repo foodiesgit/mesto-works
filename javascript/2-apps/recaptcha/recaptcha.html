@@ -117,11 +117,11 @@
       });
     }
     setCaptcha()
-    $('#refresh-btn').onclick = (e) => {
+    $('#refresh-btn').onclick = e => {
       $('#captcha').innerText = ''
       setCaptcha()
     }
-    $('#submit').addEventListener('click', (e) => {
+    $('#submit').onclick =  e => {
       let recapctha_input = $('#recapctha_input').value
       if (key != recapctha_input) {
         e.preventDefault()
@@ -131,8 +131,8 @@
       } else {
         return true
       }
-    })
-    const avoidCopy = (e) => {
+    }
+    const avoidCopy = e => {
       e.preventDefault()
     }
   </script>
