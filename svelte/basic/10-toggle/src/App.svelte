@@ -1,11 +1,11 @@
 <script>
 	export let name;
-	import Fetch from "./Toggle.svelte";
+	import Toggle from "./Toggle.svelte";
 </script>
 
 <main>
 	<h2>{name}</h2>
-	<Fetch />
+	<Toggle />
 </main>
 
 <style>
