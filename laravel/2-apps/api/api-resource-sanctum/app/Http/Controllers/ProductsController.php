@@ -13,7 +13,7 @@ class ProductsController extends Controller
     {
         $getProducts = Products::all();
         if($getProducts->count() < 1){
-            return response()->json(['message' => 'Data not found!'],200);
+            return response()->json(['message' => 'Data not found!'], 204);
         }
         return Products::all();
         // return response()->json(Products::all());
@@ -22,14 +22,15 @@ class ProductsController extends Controller
 
     public function store(ProductsCreateRequest $request)
     {
-        return Products::create($request->all());
+        Products::create($request->all());
+        return response()->json(['message' => 'Product created succesfully!'],201);
     }
 
     public function show($id)
     {
         $detailsProduct = Products::find($id);
         if(is_null($detailsProduct)){
-            return response()->json(['message' => 'Data not found!'],200);
+            return response()->json(['message' => 'Data not found!'],204);
         }
         return Products::find($id);
     }
@@ -38,7 +39,7 @@ class ProductsController extends Controller
     {
         $updateProduct = Products::find($id);
         if(is_null($updateProduct)){
-            return response()->json(['message' => 'Data not found!'],200);
+            return response()->json(['message' => 'Data not found!'],204);
         }
         return $updateProduct->update($request->all());
     }
@@ -47,7 +48,7 @@ class ProductsController extends Controller
     {
         $destroyProduct = Products::find($id);
         if(is_null($destroyProduct)){
-            return response()->json(['message' => 'Data not found!'],200);
+            return response()->json(['message' => 'Data not found!'],204);
         }
         return Products::destroy($id);
     }
@@ -56,7 +57,7 @@ class ProductsController extends Controller
     {
         $searchProducts = Products::where('name', 'LIKE', '%'.$name.'%')->get();
         if($searchProducts->count() < 1){
-            return response()->json(['message' => 'Data not found!'],200);
+            return response()->json(['message' => 'Data not found!'],204);
         }
         return Products::where('name', 'LIKE', '%'.$name.'%')->get();
     }
