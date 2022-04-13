@@ -6,7 +6,8 @@
 <main>
   <h2>{name}</h2>
   <Widget content="Content as prop">
-    <hp>This is a slot that come from where called</hp>
+    <p>This is a slot without name that come from where called</p>
+    <p slot="second-slot">This is a second slot with name that come from where called</p>
   </Widget>
 </main>
 

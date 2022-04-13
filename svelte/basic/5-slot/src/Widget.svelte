@@ -9,6 +9,7 @@
 <p>This is a component</p>
 <p>{content}</p>
 <slot></slot>
+<slot name="second-slot"></slot>
 <style>
 	
 </style>
