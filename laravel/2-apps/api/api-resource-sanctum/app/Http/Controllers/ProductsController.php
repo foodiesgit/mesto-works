@@ -15,9 +15,7 @@ class ProductsController extends Controller
         if($getProducts->count() < 1){
             return response()->json(['message' => 'Data not found!'], 204);
         }
-        return Products::all();
-        // return response()->json(Products::all());
-        // return Products::all(['name']);
+        return response()->json(Products::all(),200);
     }
 
     public function store(ProductsCreateRequest $request)
