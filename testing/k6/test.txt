@@ -1,0 +1,22 @@
+1 Postman (to test rest api)
+2 Selenium (Automation frontend test )
+3 JMeter (Performance test)
+
+
+
+composer require --dev phpunit/phpunit
+in package.json
+"scripts": {
+    ...
+    "tests": "php vendor/phpunit/phpunit/phpunit"
+},
+then npm run test
+
+//or
+run project in folder
+php artisan test
+php artisan test --testsuite=Unit
+php artisan test --filter test_login_form
+
+
+//or instal phpunit extension and add win+ctrl+t as shortcut
