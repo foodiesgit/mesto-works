@@ -14,13 +14,15 @@
     "/contact": Contact,
     "*": Error,
   };
+
+  let active = 'home';
 </script>
 
 <main>
 	<nav>
-		<a href="#/">Home</a>
-		<a href="#/users">Users</a>
-		<a href="#/contact">Contact</a>
+		<a href="#/" class="{active === 'home' ? 'selected' : ''}" on:click="{() => active = 'home'}">Home</a>
+		<a href="#/users" class="{active === 'users' ? 'selected' : ''}" on:click="{() => active = 'users'}">Users</a>
+		<a href="#/contact" class="{active === 'contact' ? 'selected' : ''}" on:click="{() => active = 'contact'}">Contact</a>
 	</nav>
   <h1>{name}</h1>
 	<Router {routes} />
@@ -37,6 +39,10 @@
   h1 {
     color: #ff3e00;
     font-weight: bold;
+  }
+
+  .selected{
+    color: red;
   }
 
   @media (min-width: 640px) {
