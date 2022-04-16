@@ -20,6 +20,13 @@
     console.log(Object.keys(person))
     console.log(Object.values(person))
     console.log(person.fullName())
+
+    person.name = 'Deniz'
+    delete person.lastName
+    console.log(person.fullName())
+
+    console.log(Object.keys(person))
+    console.log(Object.values(person))
   </script>
 </body>
 
