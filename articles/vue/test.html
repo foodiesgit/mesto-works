@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <ul style="width:300px;padding:10px;list-style :none;background-color: red;border: 1px solid yellow;display: flex;flex-direction: column;">
+      <li v-for="list in users">
+        <span>{{list.id}}</span>
+        <span>{{list.name}}</span>
+      </li>
+    </ul>
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Test',
+        users:[
+          {id:1,name:'Mesto'},
+          {id:2,name:'Baran'},
+          {id:3,name:'Reso'}
+        ]
+      }
+    })
+  </script>
+</body>
+</html>

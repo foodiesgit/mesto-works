@@ -1,0 +1,7 @@
+open cmd in your main folder then type python
+then type
+from app.server import db (path of your application)
+then type
+db.create_all()
+now done
+  

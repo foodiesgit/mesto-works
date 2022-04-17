@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 120px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    select{
+      width: 180px; 
+      height: 20px; 
+      margin-left: 15px;
+      font-size: 15px;
+    }
+    .green{
+      background-color: green;
+    }
+    .blue{
+      background-color: blue;
+    }
+    .red{
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <select v-model="color">
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+      <option value="red">Red</option>
+    </select>
+    <div :class="color" class="box">
+      <h2 style="color: #fff;">Box</h2>
+    </div>
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Class',
+        color:'green'
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block body_content%}
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <th>Date</th>
+      <th>Id</th>
+      <th>League</th>
+      <th>Matches</th>
+    </thead>
+    <tbody>
+      {% for item in data[0].results %}
+        <tr>
+          <th>{{item.time}}</th>
+          <th>{{item.league.id}}</th>
+          <th>{{item.league.name}}</th>
+          <th>{{item.home.name}} - {{item.away.name}}</th>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

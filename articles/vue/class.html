@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 120px;
+      margin: 10px;
+      border-radius: 5px;
+      background-color: cadetblue;
+    }
+    .boxClass{
+      background-color: seagreen;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <button @click="handel = !handel" style="margin-left: 15px; width: 190px;height: 30px;">
+      <span v-if="handel">Blue</span>
+      <span v-else>Green</span>
+    </button>
+    <div :class="{boxClass: handel}" class="box">
+      <h2 style="color: #fff;">Box</h2>
+    </div>
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Class',
+        handel:false
+      }
+    })
+  </script>
+</body>
+</html>

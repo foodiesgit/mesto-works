@@ -1,0 +1,34 @@
+python -m venv projectname
+cd project name
+Scripts\activate
+pip install Flask
+  1 create app.py in main directory-------------------------
+    from flask import Flask, render_template
+    app = Flask(__name__)
+
+    @app.route('/')
+    def index():
+      return render_template('index.html')
+
+  2 create templates folder in main folder
+  3 create index.html in templates
+----------------------------------------------------------
+
+  if you want to run flask in different folder-------------
+  create app folder
+    create __init__.py file
+    add this - from .server import app
+    --------------------------------- server.py
+    create server.py file
+    from flask import Flask, render_template
+    app = Flask(__name__)
+
+    @app.route('/')
+    def index():
+      return render_template('index.html')
+  -------------------------------------------------------run
+    for auto restart
+    set FLASK_ENV=development
+    flask run
+
+  

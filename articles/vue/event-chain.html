@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <input type="text" v-model="name" @keyup.enter.space="getName()">
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Event Chain',
+        name:null
+      },
+      methods: {
+        getName(){
+          alert(this.name)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

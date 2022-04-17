@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block body_content%}
+
+  <form method="POST">
+    <div class="mb-3">
+      <label for="name" class="form-label">{{user[1]}}</label>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="text" name="pass" class="form-control" value="{{user[2]}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+
+{% endblock %}

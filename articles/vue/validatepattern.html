@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .form-con{
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+      margin: 20px auto;
+    }
+    .form{
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    input{
+      height: 24px;
+      margin: 5px 0;
+      padding-left: 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <hr>
+    <div class="form-con">
+      <form @submit.prevent = 'userValid' class="form">
+        <input type="text" v-model="setUser.user" required pattern=".{4,}" oninvalid="this.setCustomValidity('User en az 6 karekter olmalıdır!')" oninput="setCustomValidity('')" class="reg-inp" placeholder="User">
+        <button>User Valid</button>
+      </form>
+      <form @submit.prevent = 'passValid' class="form">
+        <input type="text" v-model="setUser.pass" required pattern=".{6,}" oninvalid="this.setCustomValidity('Şifre en az 6 karekter olmalıdır!')" oninput="setCustomValidity('')" class="reg-inp" placeholder="Pass">
+        <button>Pass valid</button>
+      </form>
+      <form @submit.prevent = 'numberValid' class="form">
+        <input type="number" v-model="setUser.credit" min="300" max="5000" required oninvalid="this.setCustomValidity('Kredi 300 ile 5000 arasi olmalidir!')" oninput="setCustomValidity('')" class="reg-inp" placeholder="Credit">
+        <button>Number Valid</button>
+      </form>
+      <form @submit.prevent = 'emailValid' class="form">
+        <input type="email" v-model="setUser.email"  required oninvalid="this.setCustomValidity('Email gecersiz!')" oninput="setCustomValidity('')" class="reg-inp" placeholder="Email">
+        <button>Email valid</button>
+      </form>
+      <form @submit.prevent = 'stringValid' class="form">
+        <input type="text" v-model="setUser.onlystring"  required pattern="[A-Z,a-z]{5}" oninvalid="this.setCustomValidity('Only String And 5 Length!')" oninput="setCustomValidity('')" class="reg-inp" placeholder="String">
+        <button>String Valid</button>
+      </form>
+    </div>
+    
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data (){
+        return{
+          title:'Vue.Js Validate Pattern',
+          setUser:{
+            user:null,
+            pass:null,
+            credit:null,
+            onlystring:null
+          }
+        }
+      },
+      methods:{
+        userValid(){
+          alert('Done...')
+        },
+        passValid(){
+          alert('Done...')
+        },
+        numberValid(){
+          alert('Done...')
+        },
+        emailValid(){
+          alert('Done...')
+        },
+        stringValid(){
+          alert('Done...')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block body_content%}
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <th>Name</th>
+      <th>Password</th>
+      <th>Proccess</th>
+    </thead>
+    <tbody>
+      <tr>
+        <th>{{user[1]}}</th>
+        <th>{{user[2]}}</th>
+        <th style="width: 280px;">
+          <form action="update/{{user[0]}}" method="GET"  style="width: 115px;float: right";>
+            <input type="submit" class="btn btn-warning" value="Update">
+          </form>
+          <form action="delete/{{user[0]}}" method="POST"  style="width: 115px;float: right";>
+            <input type="submit" class="btn btn-danger" value="Delete">
+          </form>
+        </th>
+      </tr> 
+  </table>
+
+{% endblock %}

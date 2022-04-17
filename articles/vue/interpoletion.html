@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <input type="text" v-model="number">
+    <span style="margin-left: 10px;">{{number}}</span>
+    <h3 style="color: green;">{{number > 10 ? 'Number 10 dan buyuktur!' : 'Number 10 dan kucuktur!'}}</h3>
+    <span style="color:red; font-size: 20px;">{{(number / 2) * 5}}</span>
+    <hr>
+  </div>
+<!-- script side -->
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        title:'Vue.Js Interpolotion',
+        number:null
+      }
+    })
+  </script>
+</body>
+</html>
