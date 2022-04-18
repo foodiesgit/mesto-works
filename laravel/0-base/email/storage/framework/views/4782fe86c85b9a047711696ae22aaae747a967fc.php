@@ -1,0 +1,1 @@
+Helo guys<?php /**PATH C:\Users\Muhtar\Desktop\works\laravel-project\email\resources\views/mail.blade.php ENDPATH**/ ?>
