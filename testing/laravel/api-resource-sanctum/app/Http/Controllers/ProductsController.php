@@ -13,7 +13,7 @@ class ProductsController extends Controller
     {
         $getProducts = Products::all();
         if($getProducts->count() < 1){
-            return response()->json(['message' => 'Data not found!'], 204);
+            return response()->json(['message' => 'Data not found!'], 200);
         }
         return response()->json(Products::all(),200);
     }
@@ -21,7 +21,7 @@ class ProductsController extends Controller
     public function store(ProductsCreateRequest $request)
     {
         Products::create($request->all());
-        return response()->json(['message' => 'Product created succesfully!'],201);
+        return response()->json(['message' => 'Product created succesfully!'], 201);
     }
 
     public function show($id)
@@ -46,7 +46,7 @@ class ProductsController extends Controller
     {
         $destroyProduct = Products::find($id);
         if(is_null($destroyProduct)){
-            return response()->json(['message' => 'Data not found!'],204);
+            return response()->json(['message' => 'Data not found!'],200);
         }
         return Products::destroy($id);
     }
@@ -55,7 +55,7 @@ class ProductsController extends Controller
     {
         $searchProducts = Products::where('name', 'LIKE', '%'.$name.'%')->get();
         if($searchProducts->count() < 1){
-            return response()->json(['message' => 'Data not found!'],204);
+            return response()->json(['message' => 'Data not found!'],200);
         }
         return Products::where('name', 'LIKE', '%'.$name.'%')->get();
     }
