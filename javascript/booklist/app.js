@@ -8,23 +8,12 @@ class Books {
 }
 class UI {
   static DisplayBooks() {
-    const StoredBooks = [
-      {
-        title: "Book1",
-        author: "Author1",
-        price: 30,
-      },
-      {
-        title: "Book1",
-        author: "Author2",
-        price: 26,
-      },
-    ];
+    const StoredBooks = JSON.parse(localStorage.getItem('books'))
     StoredBooks.forEach((item) => UI.AddBookToList(item));
   }
   static AddBookToList(param) {
     el("#book_list").innerHTML += `
-      <tr>
+      <tr class="book_list">
         <th>${param.title}</th>
         <th>${param.author}</th>
         <th>${param.price}</th>
@@ -46,20 +35,31 @@ document.addEventListener("DomContentLoaded", UI.DisplayBooks());
 
 el("#book_form").onsubmit = (e) => {
   e.preventDefault();
-  const title = el("#title").value;
-  const author = el("#author").value;
-  const price = el("#price").value;
-  const book = new Books(title, author, price);
 
-  // el("#book_list").innerHTML=''
+  const book = new Books(el("#title").value, el("#author").value, el("#price").value);
+  let rr = []
+  if (localStorage.getItem('books') === null) {
+    rr = []
+  } else {
+    rr = JSON.parse(localStorage.getItem('books'))
+  }
+  rr.push(book)
+  localStorage.setItem('books', JSON.stringify(rr))
+  el("#book_list").innerHTML=''
   UI.ClearForm();
   UI.DisplayBooks();
 };
 
-document.querySelectorAll(".del_btn").forEach((item) => {
+document.querySelectorAll(".book_list").forEach((item, index) => {
   item.onclick = (e) => {
     UI.DeleteBook(e.target);
+    let books = JSON.parse(localStorage.getItem('books'))
+    books.splice(index,1)
+    console.log(index)
+    localStorage.setItem('books', JSON.stringify(books))
   };
 });
+
+
 
 // console.log(Object.keys(new Books))
