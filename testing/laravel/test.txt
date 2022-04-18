@@ -1,10 +1,10 @@
-1 Postman (to test rest api)
-2 Selenium (Automation frontend test )
-3 JMeter (Performance test)
-
-
-
 composer require --dev phpunit/phpunit
+
+1 change env file as sqlite DB_CONNECTION=sqlite
+2 phpunit.xml uncomment below
+    <env name="DB_DATABASE" value=":memory:"/>
+    <env name="DB_CONNECTION" value="sqlite"/>
+
 in package.json
 "scripts": {
     ...
