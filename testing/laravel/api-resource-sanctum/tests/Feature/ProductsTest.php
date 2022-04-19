@@ -11,6 +11,7 @@ class ProductsTest extends TestCase
     //get--------------------------------------------------------------
     public function test_get_products()
     {
+        // $response = $this->getJson(route('products'));//with route and json format(not: first check has route name)
         $response = $this->get('/api/products');
         $response->assertStatus(200);
     }

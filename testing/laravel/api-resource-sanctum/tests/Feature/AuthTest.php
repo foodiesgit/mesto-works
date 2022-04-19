@@ -32,5 +32,4 @@ class AuthTest extends TestCase
 
         $this->assertTrue($user1->name != $user2->name);
     }
-    
 }
