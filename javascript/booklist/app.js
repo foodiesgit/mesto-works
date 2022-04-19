@@ -8,11 +8,12 @@ class Books {
 }
 class UI {
   static DisplayBooks() {
-    if(localStorage.getItem('books') !== null){
-      const StoredBooks = JSON.parse(localStorage.getItem('books'))
+    if (localStorage.getItem("books") !== null) {
+      const StoredBooks = JSON.parse(localStorage.getItem("books"));
       StoredBooks.forEach((item) => UI.AddBookToList(item));
     }
   }
+
   static AddBookToList(param) {
     el("#book_list").innerHTML += `
       <tr class="book_list">
@@ -23,9 +24,11 @@ class UI {
       </tr>
     `;
   }
+
   static DeleteBook(param) {
     param.parentElement.parentElement.remove();
   }
+
   static ClearForm() {
     el("#title").value = "";
     el("#author").value = "";
@@ -38,15 +41,19 @@ document.addEventListener("DomContentLoaded", UI.DisplayBooks());
 el("#book_form").onsubmit = (e) => {
   e.preventDefault();
 
-  const book = new Books(el("#title").value, el("#author").value, el("#price").value);
-  const localBook = localStorage.getItem('books')
-  let newBook = []
+  const book = new Books(
+    el("#title").value,
+    el("#author").value,
+    el("#price").value
+  );
+  const localBook = localStorage.getItem("books");
+  let newBook = [];
 
-  localBook === null ? newBook = [] : newBook = JSON.parse(localBook)
-  newBook.push(book)
-  localStorage.setItem('books', JSON.stringify(newBook))
+  localBook === null ? (newBook = []) : (newBook = JSON.parse(localBook));
+  newBook.push(book);
+  localStorage.setItem("books", JSON.stringify(newBook));
 
-  el("#book_list").innerHTML=''
+  el("#book_list").innerHTML = "";
   UI.ClearForm();
   UI.DisplayBooks();
 };
@@ -54,13 +61,11 @@ el("#book_form").onsubmit = (e) => {
 document.querySelectorAll(".book_list").forEach((item, index) => {
   item.onclick = (e) => {
     UI.DeleteBook(e.target);
-    let books = JSON.parse(localStorage.getItem('books'))
-    books.splice(index,1)
-    console.log(index)
-    localStorage.setItem('books', JSON.stringify(books))
+    let books = JSON.parse(localStorage.getItem("books"));
+    books.splice(index, 1);
+    console.log(index);
+    localStorage.setItem("books", JSON.stringify(books));
   };
 });
-
-
 
 // console.log(Object.keys(new Books))
