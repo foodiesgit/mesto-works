@@ -8,7 +8,6 @@ use Tests\TestCase;
 use App\Models\User;
 class ProductsTest extends TestCase
 {
-    use RefreshDatabase;
     //get--------------------------------------------------------------
     public function test_get_products()
     {
@@ -20,7 +19,7 @@ class ProductsTest extends TestCase
     public function test_get_products_id()
     {
         $response = $this->get('/api/products/1');
-        $response->assertStatus(200);
+        $response->assertStatus(204);
     }
 
     //get with search---------------------------------------------------

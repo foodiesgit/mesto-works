@@ -9,9 +9,13 @@ class Books {
 class UI {
   static DisplayBooks() {
     if (localStorage.getItem("books") !== null) {
-      const StoredBooks = JSON.parse(localStorage.getItem("books"));
+      let StoredBooks = JSON.parse(localStorage.getItem("books"));
       StoredBooks.forEach((item) => UI.AddBookToList(item));
     }
+    document.querySelectorAll(".del_btn").forEach((item, index) => {
+      console.log(item)
+      item.onclick = (e) => UI.DeleteBook(e.target, index);
+    });
   }
 
   static AddBookToList(param) {
@@ -25,8 +29,11 @@ class UI {
     `;
   }
 
-  static DeleteBook(param) {
-    param.parentElement.parentElement.remove();
+  static DeleteBook(target, index) {
+    let books = JSON.parse(localStorage.getItem("books"));
+    books.splice(index, 1);
+    localStorage.setItem("books", JSON.stringify(books));
+    target.parentElement.parentElement.remove();
   }
 
   static ClearForm() {
@@ -58,14 +65,5 @@ el("#book_form").onsubmit = (e) => {
   UI.DisplayBooks();
 };
 
-document.querySelectorAll(".book_list").forEach((item, index) => {
-  item.onclick = (e) => {
-    UI.DeleteBook(e.target);
-    let books = JSON.parse(localStorage.getItem("books"));
-    books.splice(index, 1);
-    console.log(index);
-    localStorage.setItem("books", JSON.stringify(books));
-  };
-});
 
 // console.log(Object.keys(new Books))

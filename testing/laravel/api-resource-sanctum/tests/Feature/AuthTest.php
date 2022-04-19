@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-
 class AuthTest extends TestCase
 {
     //delete--------------------------------------------------------------
@@ -18,4 +17,20 @@ class AuthTest extends TestCase
         }
         $this->assertTrue(true);
     }
+    //duplication------------------------------------------------------------
+    public function test_duplication()
+    {
+        $user1 = User::make([
+            'name' => 'Test',
+            'email' => 'test@test.com'
+        ]);
+
+        $user2 = User::make([
+            'name' => 'Test2',
+            'email' => 'test@test.com'
+        ]);
+
+        $this->assertTrue($user1->name != $user2->name);
+    }
+    
 }

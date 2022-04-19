@@ -6,7 +6,7 @@ class DbTest extends TestCase
 {
     public function test_db()
     {
-        // $this->assertDatabaseHas('users',['name' => 'admin']);//admin has
+        $this->assertDatabaseHas('users',['name' => 'admin']);//admin has
         // $this->assertDatabaseMissing('users',['name' => 'test2']);//test has
     }
 }
