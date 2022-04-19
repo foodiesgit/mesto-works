@@ -8,8 +8,10 @@ class Books {
 }
 class UI {
   static DisplayBooks() {
-    const StoredBooks = JSON.parse(localStorage.getItem('books'))
-    StoredBooks.forEach((item) => UI.AddBookToList(item));
+    if(localStorage.getItem('books') !== null){
+      const StoredBooks = JSON.parse(localStorage.getItem('books'))
+      StoredBooks.forEach((item) => UI.AddBookToList(item));
+    }
   }
   static AddBookToList(param) {
     el("#book_list").innerHTML += `
@@ -37,14 +39,13 @@ el("#book_form").onsubmit = (e) => {
   e.preventDefault();
 
   const book = new Books(el("#title").value, el("#author").value, el("#price").value);
-  let rr = []
-  if (localStorage.getItem('books') === null) {
-    rr = []
-  } else {
-    rr = JSON.parse(localStorage.getItem('books'))
-  }
-  rr.push(book)
-  localStorage.setItem('books', JSON.stringify(rr))
+  const localBook = localStorage.getItem('books')
+  let newBook = []
+
+  localBook === null ? newBook = [] : newBook = JSON.parse(localBook)
+  newBook.push(book)
+  localStorage.setItem('books', JSON.stringify(newBook))
+
   el("#book_list").innerHTML=''
   UI.ClearForm();
   UI.DisplayBooks();
